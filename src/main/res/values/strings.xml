@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Medic Log</string>
+    <string name="about">About</string>
+    <string name="preferences">Preferences</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	  <EditTextPreference android:title="Your Name"
+	                        android:key="username"
+	                      android:summary="Please provide your username"></EditTextPreference>
+
+	  <EditTextPreference android:title="Send From"
+                               android:key="sendFrom"
+	                       android:summary="The default sender to use in the Send Function."
+	                       android:defaultValue=""
+	                       />		       
+	  <EditTextPreference android:title="Send To"
+                               android:key="sendTo"
+	                       android:summary="The default recipient to use in the Send Function."
+	                       android:defaultValue=""
+			       />
+
+         <EditTextPreference android:title="Send Subject"
+				android:key="sendSubject"
+	       			android:summary="Subject to use in the Send Function."
+				android:defaultValue="MedicLog records"
+				/>
+
+
+	        <CheckBoxPreference android:title="Application Updates"
+                   android:defaultValue="false"
+                   android:summary="This option if selected will allow the application to check for latest versions."
+                   android:key="applicationUpdates" />
+	         <CheckBoxPreference android:title="Time in UTC"
+			 android:defaultValue="true"
+			android:summary="If selected the recorded times will be in UTC, otherwise in local time."
+			android:key="timeUTC"
+			/>
+	    <ListPreference     android:title="Download Details"
+                     android:summary="Select the kind of data that you would like to download"
+                       android:key="downloadType"
+                      android:defaultValue="1"
+                      android:entries="@array/listArray"
+                      android:entryValues="@array/listValues" />
+  </PreferenceScreen>
