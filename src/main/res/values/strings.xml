@@ -3,4 +3,9 @@
     <string name="app_name">Medic Log</string>
     <string name="about">About</string>
     <string name="preferences">Preferences</string>
+    <string name="about_text">
+      <![CDATA[ 
+      Author: John Lines<br/><br/>Mediclog logs medical information with a focus
+      on simplicity and privacy. It is licenced under GPL2 or later. ]]>
+	  </string>
 </resources>

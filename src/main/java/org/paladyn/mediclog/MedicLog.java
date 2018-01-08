@@ -57,6 +57,10 @@ public class MedicLog extends Activity {
 	                Intent i = new Intent(this, MyPreferencesActivity.class);
 	                startActivity(i);
 	               return true;
+		               case R.id.menu_item_about:
+			       Intent j = new Intent(this,About.class);
+			       startActivity(j);
+			       return true;
 	               default:
 	                 return super.onOptionsItemSelected(item);
 	               }
@@ -290,9 +294,7 @@ public class MedicLog extends Activity {
 
            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 	   emailIntent.setType("plain/text");
-//	   emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "john@paladyn.org");
-	   emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo",""));
-//	   emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MedicLog");
+	   emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo","").split(","));
 	   emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, sharedPref.getString("sendSubject","MedicLog"));
 
 //  put something to pick up the attachment
