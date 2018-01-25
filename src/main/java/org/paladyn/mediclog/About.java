@@ -29,7 +29,12 @@ public class About extends Activity {
 	TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
 
     Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
-	                + getString(R.string.about_text));
+	                + getString(R.string.about_text) + "<p>"
+			);
+// Following commented out until I can work out how to do it
+//			+ getString(R.string.records_read) + Integer.toString(MedicLog.numRecsReadFromFile) + "<br>"
+//			+ getString(R.string.records_appended) + String.valueOf(MedicLog.numRecsAppendedToFile) );
+
         aboutTextView.setText(aboutText);
 
 

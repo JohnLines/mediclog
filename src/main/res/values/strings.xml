@@ -8,4 +8,6 @@
       Author: John Lines<br/><br/>Mediclog logs medical information with a focus
       on simplicity and privacy. It is licenced under GPL2 or later. ]]>
 	  </string>
+    <string name="records_read">Records Read </string>
+    <string name="records_appended">Records Appended </string>
 </resources>

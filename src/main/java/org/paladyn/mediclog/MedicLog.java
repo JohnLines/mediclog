@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.zip.DataFormatException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -31,6 +33,9 @@ import android.net.Uri;
 
 
 public class MedicLog extends Activity {
+
+   public int numRecsReadFromFile=0;
+   public int numRecsAppendedToFile=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,11 +71,24 @@ public class MedicLog extends Activity {
 	               }
 	     }
 
+	private void createLog(File file) {
+		try {
+                FileOutputStream os = new FileOutputStream(file);
+		BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(os));
+		fbw.write("MedicLog 1.0,Date time,Systolic,Diastolic,Heart rate,Temperature,Weight,Comment");
+		fbw.newLine();
+		fbw.flush();
+		fbw.close();
+                        if (BuildConfig.DEBUG) {
+	                   Log.d("mediclog","Log file created "+file.getName());
+	                   }
+		} catch (IOException ioe) {
+		       ioe.printStackTrace();
+	        }	       
+        }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
+	 private void readLog() throws DataFormatException {
 
 //   Read in existing log entries until end of file
         FileInputStream is;
@@ -82,24 +100,43 @@ public class MedicLog extends Activity {
 		try {
 		is = new FileInputStream(file);
 		reader = new BufferedReader(new InputStreamReader(is));
-		String line = reader.readLine();
+		String recordFormat;
 		String lastline = null;
+		// First line should be the header
+		String header = reader.readLine();
+		String[] hvals = header.split(",");
+                if ( ! hvals[0].equals("MedicLog 1.0")) {
+//			throw new DataFormatException("MedicLog -Unknown format type *"+hvals[0]+"*");
+			Log.d("mediclog","Unknown format type "+hvals[0]);
+		}
+		String line = reader.readLine();
 		while (line != null) {
 			lastline = line;
+			numRecsReadFromFile = numRecsReadFromFile + 1;
+                        if (BuildConfig.DEBUG) {
+	                   Log.d("mediclog","Read line "+line);
+	                   }
 			line = reader.readLine();
 	        }
 		if (lastline != null) {
 		String[] values = lastline.split(",");
+		recordFormat = values[0];
+		// recordFormat should always be 1 at the moment
+		if ( ! recordFormat.equals("1")) {
+
+			throw new DataFormatException("MedicLog Unknown record format *"+recordFormat+"*");
+//			Log.d("mediclog","Unknown record format *"+recordFormat+"*");
+		}
 	        EditText systolicText = (EditText) findViewById(R.id.systolicText);
-		systolicText.setText(values[1]);
+		systolicText.setText(values[2]);
 	        EditText diastolicText = (EditText) findViewById(R.id.diastolicText);
-		diastolicText.setText(values[2]);
+		diastolicText.setText(values[3]);
 	 	EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
-		heartrateText.setText(values[3]);
+		heartrateText.setText(values[4]);
 	 	EditText tempText = (EditText) findViewById(R.id.tempText);
-		tempText.setText(values[4]);
+		tempText.setText(values[5]);
 	 	EditText weightText = (EditText) findViewById(R.id.weightText);
-		weightText.setText(values[5]);
+		weightText.setText(values[6]);
 		}
 	   } catch(IOException ioe) {
 		   ioe.printStackTrace();
@@ -107,22 +144,34 @@ public class MedicLog extends Activity {
 	   } else {
 		Toast.makeText(getBaseContext(), "File does not exist",
 				Toast.LENGTH_SHORT).show();
-		try {
-                FileOutputStream os = new FileOutputStream(file);
-//                OutputStreamWriter osw = new openFileOutput("mediclog.txt",MODE_PRIVATE);
-		BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(os));
-		fbw.close();
-		} catch (IOException ioe) {
-		       ioe.printStackTrace();
+                        if (BuildConfig.DEBUG) {
+	                   Log.d("mediclog","ReadLog -about to create file "+file.getName());
+	                   }
+		createLog(file);
 	        }	       
-            }
+            } 
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+	try {
+	  readLog();
+	}  catch (DataFormatException dfe) {
+		dfe.printStackTrace();
+	}
+
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
 	
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText("Medic Log - logs medical information");
         Calendar calendar = Calendar.getInstance();
-// Note, time is in UTC at the moment. There should be a preferences item to say
-// if it should be in local time.	
+        
         SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	   if ( ! sharedPref.getBoolean("timeUTC",true)) {
+		   mdformat.setTimeZone(TimeZone.getDefault());
+	   }
         String strDate = mdformat.format(calendar.getTime());
 	TextView dateView = (TextView) findViewById(R.id.date_view);
 	dateView.setText(strDate);
@@ -265,19 +314,23 @@ public class MedicLog extends Activity {
 	 String commentStr = commentText.getText().toString();
 
 	 try {
-		 FileOutputStream fOut =
-			 openFileOutput("mediclog.txt",MODE_PRIVATE|MODE_APPEND);
-//			 openFileOutput("mediclog.txt",MODE_PRIVATE);
+		 File file = new File(getFilesDir(),"mediclog.txt");
+                if ( ! file.exists()) {
+                        if (BuildConfig.DEBUG) {
+	                   Log.d("mediclog","Save -about to create file "+file.getName());
+	                   }
+	            	createLog(file);
+		}
+		 FileOutputStream fOut = new FileOutputStream(file,true);
 		OutputStreamWriter osw = new
 			OutputStreamWriter(fOut);
-//                OutputStreamWriter osw = utStreamWriter(
-//			  openFileOutput("mediclog.txt",MODE_PRIVATE|MODE_APPEND));
 		BufferedWriter fbw = new BufferedWriter(osw);
 
-		fbw.write(strDate+","+systolicStr+","+diastolicStr+","+heartrateStr+","+tempStr+","+weightStr+","+commentStr);
+		fbw.write("1,"+strDate+","+systolicStr+","+diastolicStr+","+heartrateStr+","+tempStr+","+weightStr+","+commentStr);
 		fbw.newLine();
 		fbw.flush();
 		fbw.close();
+		numRecsAppendedToFile = numRecsAppendedToFile + 1;
 
 		Toast.makeText(getBaseContext(), "File saved successfully!",
 				Toast.LENGTH_SHORT).show();
@@ -293,7 +346,7 @@ public class MedicLog extends Activity {
 	   SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
 
            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-	   emailIntent.setType("plain/text");
+	   emailIntent.setType("text/csv");
 	   emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo","").split(","));
 	   emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, sharedPref.getString("sendSubject","MedicLog"));
 
@@ -308,6 +361,16 @@ public class MedicLog extends Activity {
 
 
 	}
+
+     public void onClickDelete(View view) {
+              File dir = getFilesDir();
+	      File file = new File(dir, "mediclog.txt");
+	      boolean deleted = file.delete();
+                        if (BuildConfig.DEBUG) {
+	                   Log.d("mediclog","Log file deleted");
+	                   }
+	   }
+
 
 }
 
