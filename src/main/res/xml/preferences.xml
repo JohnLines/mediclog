@@ -18,4 +18,10 @@
 			android:summary="If selected the recorded times will be in UTC, otherwise in local time."
 			android:key="timeUTC"
 			/>
+
+		<CheckBoxPreference android:title="Display Privacy Policy on startup"
+			android:defaultValue="true"
+			android:summary="Display the Privacy Policy for MedicLog on startup."
+			android:key="displayPrivacy"
+			/>
   </PreferenceScreen>

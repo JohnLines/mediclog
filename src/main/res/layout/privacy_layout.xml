@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+  <LinearLayout
+  	android:orientation="vertical"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	>
+
+      <RelativeLayout
+          android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+          android:padding="12dp" >
+
+      <TextView
+            android:id="@+id/privacy_text_view"
+          android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+  </RelativeLayout>
+
+  <LinearLayout
+  	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	>
+
+	<Button
+	android:id="@+id/btnAccept"
+	android:text="Accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	android:ems="6"
+	android:onClick="onClickAccept"
+	/>
+
+  </LinearLayout>
+
+
+  </LinearLayout>
+
+</ScrollView>

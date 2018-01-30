@@ -156,13 +156,20 @@ public class MedicLog extends Activity {
     public void onStart() {
         super.onStart();
 
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
+	   if ( sharedPref.getBoolean("displayPrivacy",true)) {
+		Intent i = new Intent(this,DisplayPrivacy.class);
+		startActivity(i);
+
+	   }
+
+
 	try {
 	  readLog();
 	}  catch (DataFormatException dfe) {
 		dfe.printStackTrace();
 	}
 
-	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
 	
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText("Medic Log - logs medical information");
