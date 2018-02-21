@@ -128,15 +128,15 @@ public class MedicLog extends Activity {
 //			Log.d("mediclog","Unknown record format *"+recordFormat+"*");
 		}
 	        EditText systolicText = (EditText) findViewById(R.id.systolicText);
-		systolicText.setText(values[2]);
+		if (values.length >2 && values[2] != null) {systolicText.setText(values[2]);}
 	        EditText diastolicText = (EditText) findViewById(R.id.diastolicText);
-		diastolicText.setText(values[3]);
+		if (values.length >3 && values[3] != null) {diastolicText.setText(values[3]);}
 	 	EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
-		heartrateText.setText(values[4]);
+		if (values.length > 4 && values[4] != null) {heartrateText.setText(values[4]);}
 	 	EditText tempText = (EditText) findViewById(R.id.tempText);
-		tempText.setText(values[5]);
+		if (values.length > 5 && values[5] != null ) {tempText.setText(values[5]);}
 	 	EditText weightText = (EditText) findViewById(R.id.weightText);
-		weightText.setText(values[6]);
+		if (values.length > 6 && values[6] != null) {weightText.setText(values[6]);}
 		}
 	   } catch(IOException ioe) {
 		   ioe.printStackTrace();
@@ -189,6 +189,16 @@ public class MedicLog extends Activity {
         TextView weightView = (TextView) findViewById(R.id.weight_view);
         weightView.setText("Weight");
 
+
+    }
+
+    public void onClickBpClear(View view) {
+	 EditText systolicText = (EditText) findViewById(R.id.systolicText);
+	 systolicText.setText("");
+	 EditText diastolicText = (EditText) findViewById(R.id.diastolicText);
+	 diastolicText.setText("");
+	 EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
+	 heartrateText.setText("");
 
     }
 
@@ -251,6 +261,10 @@ public class MedicLog extends Activity {
       }
 	 
 
+    public void onClickTempClear(View view) {
+	 EditText tempText = (EditText) findViewById(R.id.tempText);
+	 tempText.setText("");
+    }
 
 
     public void onClickTempMinus(View view) {
@@ -275,8 +289,11 @@ public class MedicLog extends Activity {
 	 tempStr = String.format("%d",temp);
 	 tempStr2 = new StringBuilder(tempStr).insert(tempStr.length()-1,".").toString();
 	 tempText.setText(tempStr2);
+    }
 
-
+    public void onClickWeightClear(View view) {
+	 EditText weightText = (EditText) findViewById(R.id.weightText);
+	 weightText.setText("");
     }
 
     public void onClickWeightMinus(View view) {
@@ -302,6 +319,11 @@ public class MedicLog extends Activity {
 	 weightText.setText(weightStr2);
 
 
+    }
+
+    public void onClickCommentClear(View view) {
+	 EditText commentText = (EditText) findViewById(R.id.commentText);
+	 commentText.setText("");
     }
 
     public void onClickSave(View view) {
