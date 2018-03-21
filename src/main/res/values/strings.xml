@@ -3,6 +3,7 @@
     <string name="app_name">Medic Log</string>
     <string name="about">About</string>
     <string name="preferences">Preferences</string>
+    <string name="history">History</string>
     <string name="privacy">Privacy</string>
     <string name="about_text">
       <![CDATA[ 

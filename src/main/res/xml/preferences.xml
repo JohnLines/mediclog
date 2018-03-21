@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+	  <EditTextPreference android:title="File name"
+                               android:key="fileName"
+	                       android:summary="The filename to store the Medic Log information"
+	                       android:defaultValue="mediclog.txt"
+			       />
+
+
 	  <EditTextPreference android:title="Send To"
                                android:key="sendTo"
 	                       android:summary="The default recipient to use in the Send Function."
@@ -12,6 +19,14 @@
 	       			android:summary="Subject to use in the Send Function."
 				android:defaultValue="MedicLog records"
 				/>
+         
+         <EditTextPreference android:title="History Length"
+				android:key="historyLength"
+	       			android:summary="Maximum number of records to go back in History"
+				android:defaultValue="40"
+				android:inputType="number"
+				/>
+         
 
 	         <CheckBoxPreference android:title="Time in UTC"
 			 android:defaultValue="true"

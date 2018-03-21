@@ -1,3 +1,22 @@
+/* 
+*   Copyright (C) 2018  John Lines <john.mediclog@paladyn.org>
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU General Public License for more details.
+*
+*    You should have received a copy of the GNU General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
+
+
 package org.paladyn.mediclog;
 
 import java.lang.StringBuilder;
@@ -94,7 +113,10 @@ public class MedicLog extends Activity {
         FileInputStream is;
 	BufferedReader reader;
 //	final File file = new File("mediclog.txt",MODE_PRIVATE);
-	final File file = new File(getFilesDir(), "mediclog.txt");
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
+
+// was final File file
+	File file = new File(getFilesDir(), sharedPref.getString("fileName","mediclog.txt") );
 
 	if (file.exists()) {
 		try {
@@ -343,7 +365,8 @@ public class MedicLog extends Activity {
 	 String commentStr = commentText.getText().toString();
 
 	 try {
-		 File file = new File(getFilesDir(),"mediclog.txt");
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
+		 File file = new File(getFilesDir(),sharedPref.getString("fileName","mediclog.txt"));
                 if ( ! file.exists()) {
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Save -about to create file "+file.getName());
@@ -383,7 +406,7 @@ public class MedicLog extends Activity {
 //
            emailIntent.putExtra(
                android.content.Intent.EXTRA_STREAM,Uri.parse("content://"+LocalFileProvider.AUTHORITY+"/"
-		       + "mediclog.txt"));
+		       + sharedPref.getString("fileName","mediclog.txt")));
 
 
 	   this.startActivity(Intent.createChooser(emailIntent,"Sending email..."));
@@ -392,8 +415,9 @@ public class MedicLog extends Activity {
 	}
 
      public void onClickDelete(View view) {
+	   SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
               File dir = getFilesDir();
-	      File file = new File(dir, "mediclog.txt");
+	      File file = new File(dir, sharedPref.getString("fileName","mediclog.txt"));
 	      boolean deleted = file.delete();
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Log file deleted");

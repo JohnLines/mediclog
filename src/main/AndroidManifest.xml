@@ -45,6 +45,11 @@
 		android:label="@string/privacy">
 	</activity>
 
+	<activity
+		android:name=".History"
+		android:label="@string/history">
+	</activity>
+
 
 	<activity
 		android:name=".LocalContentProvider"
