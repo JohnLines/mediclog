@@ -49,9 +49,17 @@ import android.util.Log;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.net.Uri;
+import android.text.TextUtils;
 
 
 public class MedicLog extends Activity {
+
+
+   final int defaultSystolic = 130;
+   final int defaultDiastolic = 80;
+   final int defaultHeartrate = 60;
+   final int defaultTemperature = 363;
+   final int defaultWeight = 750;
 
    public int numRecsReadFromFile=0;
    public int numRecsAppendedToFile=0;
@@ -112,7 +120,7 @@ public class MedicLog extends Activity {
 //   Read in existing log entries until end of file
         FileInputStream is;
 	BufferedReader reader;
-//	final File file = new File("mediclog.txt",MODE_PRIVATE);
+
 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
 
 // was final File file
@@ -227,7 +235,8 @@ public class MedicLog extends Activity {
     public void onClickSystolicMinus(View view) {
 	 EditText systolicText = (EditText) findViewById(R.id.systolicText);
 	 String systolicStr = systolicText.getText().toString();
-         int systolic = Integer.parseInt(systolicStr);
+
+         int systolic = TextUtils.isEmpty(systolicStr) ? defaultSystolic : Integer.parseInt(systolicStr);
 	 systolic = systolic - 1;
 	 systolicStr = String.format("%d",systolic);
 	 systolicText.setText(systolicStr);
@@ -237,7 +246,7 @@ public class MedicLog extends Activity {
     public void onClickSystolicPlus(View view) {
 	 EditText systolicText = (EditText) findViewById(R.id.systolicText);
 	 String systolicStr = systolicText.getText().toString();
-         int systolic = Integer.parseInt(systolicStr);
+         int systolic = TextUtils.isEmpty(systolicStr) ? defaultSystolic : Integer.parseInt(systolicStr);
 	 systolic = systolic + 1;
 	 systolicStr = String.format("%d",systolic);
 	 systolicText.setText(systolicStr);
@@ -246,7 +255,7 @@ public class MedicLog extends Activity {
     public void onClickDiastolicMinus(View view) {
 	 EditText diastolicText = (EditText) findViewById(R.id.diastolicText);
 	 String diastolicStr = diastolicText.getText().toString();
-         int diastolic = Integer.parseInt(diastolicStr);
+         int diastolic = TextUtils.isEmpty(diastolicStr) ? defaultDiastolic :  Integer.parseInt(diastolicStr);
 	 diastolic = diastolic - 1;
 	 diastolicStr = String.format("%d",diastolic);
 	 diastolicText.setText(diastolicStr);
@@ -256,7 +265,7 @@ public class MedicLog extends Activity {
     public void onClickDiastolicPlus(View view) {
 	 EditText diastolicText = (EditText) findViewById(R.id.diastolicText);
 	 String diastolicStr = diastolicText.getText().toString();
-         int diastolic = Integer.parseInt(diastolicStr);
+         int diastolic = TextUtils.isEmpty(diastolicStr) ? defaultDiastolic : Integer.parseInt(diastolicStr);
 	 diastolic = diastolic + 1;
 	 diastolicStr = String.format("%d",diastolic);
 	 diastolicText.setText(diastolicStr);
@@ -266,7 +275,7 @@ public class MedicLog extends Activity {
     public void onClickHrateMinus(View view) {
 	 EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
 	 String heartrateStr = heartrateText.getText().toString();
-         int heartrate = Integer.parseInt(heartrateStr);
+         int heartrate = TextUtils.isEmpty(heartrateStr) ? defaultHeartrate : Integer.parseInt(heartrateStr);
 	 heartrate = heartrate - 1;
 	 heartrateStr = String.format("%d",heartrate);
 	 heartrateText.setText(heartrateStr);
@@ -276,7 +285,7 @@ public class MedicLog extends Activity {
     public void onClickHratePlus(View view) {
 	 EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
 	 String heartrateStr = heartrateText.getText().toString();
-         int heartrate = Integer.parseInt(heartrateStr);
+         int heartrate = TextUtils.isEmpty(heartrateStr) ? defaultHeartrate : Integer.parseInt(heartrateStr);
 	 heartrate = heartrate + 1;
 	 heartrateStr = String.format("%d",heartrate);
 	 heartrateText.setText(heartrateStr);
@@ -293,7 +302,7 @@ public class MedicLog extends Activity {
 	 EditText tempText = (EditText) findViewById(R.id.tempText);
 	 String tempStr = tempText.getText().toString();
 	 String tempStr2 = tempStr.replaceAll("\\.","");
-         int temp = Integer.parseInt(tempStr2);
+         int temp = TextUtils.isEmpty(tempStr2) ? defaultTemperature : Integer.parseInt(tempStr2);
 	 temp = temp - 1;
 	 tempStr = String.format("%d",temp);
 	 tempStr2 = new StringBuilder(tempStr).insert(tempStr.length()-1,".").toString();
@@ -306,7 +315,7 @@ public class MedicLog extends Activity {
 	 EditText tempText = (EditText) findViewById(R.id.tempText);
 	 String tempStr = tempText.getText().toString();
 	 String tempStr2 = tempStr.replaceAll("\\.","");
-         int temp = Integer.parseInt(tempStr2);
+         int temp = TextUtils.isEmpty(tempStr2) ? defaultTemperature : Integer.parseInt(tempStr2);
 	 temp = temp + 1;
 	 tempStr = String.format("%d",temp);
 	 tempStr2 = new StringBuilder(tempStr).insert(tempStr.length()-1,".").toString();
@@ -322,7 +331,7 @@ public class MedicLog extends Activity {
 	 EditText weightText = (EditText) findViewById(R.id.weightText);
 	 String weightStr = weightText.getText().toString();
 	 String weightStr2 = weightStr.replaceAll("\\.","");
-         int weight = Integer.parseInt(weightStr2);
+         int weight = TextUtils.isEmpty(weightStr2) ? defaultWeight : Integer.parseInt(weightStr2);
 	 weight = weight - 1;
 	 weightStr = String.format("%d",weight);
 	 weightStr2 = new StringBuilder(weightStr).insert(weightStr.length()-1,".").toString();
@@ -334,7 +343,7 @@ public class MedicLog extends Activity {
 	 EditText weightText = (EditText) findViewById(R.id.weightText);
 	 String weightStr = weightText.getText().toString();
 	 String weightStr2 = weightStr.replaceAll("\\.","");
-         int weight = Integer.parseInt(weightStr2);
+         int weight = TextUtils.isEmpty(weightStr2) ? defaultWeight : Integer.parseInt(weightStr2);
 	 weight = weight + 1;
 	 weightStr = String.format("%d",weight);
 	 weightStr2 = new StringBuilder(weightStr).insert(weightStr.length()-1,".").toString();
