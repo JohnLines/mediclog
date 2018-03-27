@@ -19,6 +19,13 @@
     />
 
 <LinearLayout
+       	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	>
+
+
+<LinearLayout
 	android:orientation="horizontal"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
@@ -166,6 +173,14 @@
 
  </LinearLayout>
 
+</LinearLayout>
+
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	>
+
 
 <LinearLayout
 	android:orientation="horizontal"
@@ -199,6 +214,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	>
+
  <Button
 	 android:id="@+id/tempMinus"
 	 android:text="-"
@@ -298,6 +314,8 @@
 	 />
 
  </LinearLayout>
+
+</LinearLayout>
 
 <LinearLayout
 	android:orientation="horizontal"

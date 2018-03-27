@@ -43,6 +43,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Button;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -106,6 +107,10 @@ public class MedicLog extends Activity {
 		fbw.newLine();
 		fbw.flush();
 		fbw.close();
+                Button deleteBtn=(Button)findViewById(R.id.btnDelete);
+                deleteBtn.setVisibility(View.VISIBLE);
+                Button sendBtn=(Button)findViewById(R.id.btnSend);
+                sendBtn.setVisibility(View.VISIBLE);
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Log file created "+file.getName());
 	                   }
@@ -128,6 +133,11 @@ public class MedicLog extends Activity {
 
 	if (file.exists()) {
 		try {
+                Button deleteBtn=(Button)findViewById(R.id.btnDelete);
+                deleteBtn.setVisibility(View.VISIBLE);
+                Button sendBtn=(Button)findViewById(R.id.btnSend);
+                sendBtn.setVisibility(View.VISIBLE);
+
 		is = new FileInputStream(file);
 		reader = new BufferedReader(new InputStreamReader(is));
 		String recordFormat;
@@ -137,7 +147,7 @@ public class MedicLog extends Activity {
 		String[] hvals = header.split(",");
                 if ( ! hvals[0].equals("MedicLog 1.0")) {
 //			throw new DataFormatException("MedicLog -Unknown format type *"+hvals[0]+"*");
-			Log.d("mediclog","Unknown format type "+hvals[0]);
+			Log.w("mediclog","Unknown format type "+hvals[0]);
 		}
 		String line = reader.readLine();
 		while (line != null) {
@@ -427,6 +437,10 @@ public class MedicLog extends Activity {
 	   SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
               File dir = getFilesDir();
 	      File file = new File(dir, sharedPref.getString("fileName","mediclog.txt"));
+              Button deleteBtn=(Button)findViewById(R.id.btnDelete);
+              deleteBtn.setVisibility(View.GONE);
+              Button sendBtn=(Button)findViewById(R.id.btnSend);
+              sendBtn.setVisibility(View.GONE);
 	      boolean deleted = file.delete();
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Log file deleted");
