@@ -31,4 +31,5 @@
 	    by means of the <b>Send</b> button.
 	    ]]>
     </string>
+    <string name="pref_privacy_group">Privacy Display Settings</string>
 </resources>

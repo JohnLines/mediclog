@@ -17,9 +17,13 @@
 
 package org.paladyn.mediclog;
 
+import android.util.Log;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+
 
 public class MyPreferencesActivity extends PreferenceActivity {
 
@@ -27,7 +31,40 @@ public class MyPreferencesActivity extends PreferenceActivity {
  protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
+
+// This was intended to make 3 checkboxes work as a radio button, but crashed on running, for now just use two check boxes
+
+//    Preference displayPrivacy = (Preference) findPreference("displayPrivacy");
+//      displayPrivacy.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+//     @Override
+//       public boolean onPreferenceClick(Preference thispref) {
+//                Log.d("mediclog","displayPrivacy selected");
+//                return true;
+//             }
+//        });
+
+//    Preference hidePrivacy = (Preference) findPreference("hidePrivacy");
+//      hidePrivacy.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+//     @Override
+//       public boolean onPreferenceClick(Preference thispref) {
+//                Log.d("mediclog","hidePrivacy selected");
+//                return true;
+//             }
+//        });
+
+
     }
+
+
+    public boolean onClickDisplayPrivacy(Preference thispref) {
+                Log.d("mediclog","displayPrivacy selected");
+                return true;
+             }
+
+
+     
 
        public static class MyPreferenceFragment extends PreferenceFragment
 	    {
@@ -38,6 +75,9 @@ public class MyPreferencesActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.preferences);
             }
         }
+
+
+
 
 }
 

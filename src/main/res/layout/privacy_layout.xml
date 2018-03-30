@@ -36,6 +36,14 @@
 	android:ems="6"
 	android:onClick="onClickAccept"
 	/>
+	<Button
+	android:id="@+id/btnAcceptKeep"
+	android:text="Accept - Keep Displaying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	android:ems="10"
+	android:onClick="onClickAcceptKeep"
+	/>
 
   </LinearLayout>
 

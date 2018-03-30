@@ -25,6 +25,7 @@
 	       			android:summary="Maximum number of records to go back in History"
 				android:defaultValue="40"
 				android:inputType="number"
+                                android:visibility="gone"
 				/>
          
 
@@ -34,9 +35,23 @@
 			android:key="timeUTC"
 			/>
 
-		<CheckBoxPreference android:title="Display Privacy Policy on startup"
+ <PreferenceCategory
+         android:title="@string/pref_privacy_group"
+                         >
+		<CheckBoxPreference android:title="Display Privacy Policy on first startup"
 			android:defaultValue="true"
 			android:summary="Display the Privacy Policy for MedicLog on startup."
 			android:key="displayPrivacy"
 			/>
+
+
+		<CheckBoxPreference android:title="Display Privacy Policy on each startup"
+			android:defaultValue="false"
+			android:summary="Display the Privacy Policy for MedicLog on each startup."
+			android:key="displayPrivacyKeep"
+			/>
+ </PreferenceCategory>
+
+
+
   </PreferenceScreen>

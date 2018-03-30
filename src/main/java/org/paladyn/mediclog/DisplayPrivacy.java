@@ -57,12 +57,29 @@ public class DisplayPrivacy extends Activity {
 	       Log.d("mediclog","Accept Privacy - before update");
        }
 
- 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
+ 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
+
 		   sharedPref.edit().putBoolean("displayPrivacy", false).commit();
+ //                  sharedPref.edit().putBoolean("displayPrivacyKeep", false).commit();
 
        if (BuildConfig.DEBUG) {
 	       Log.d("mediclog","Accept Privacy - after update");
        }
+       finish();
+   }
+
+public void onClickAcceptKeep(View view) {
+
+       if (BuildConfig.DEBUG) {
+	       Log.d("mediclog","AcceptKeep Privacy - before update");
+       }
+// Don't adjust privacy settings
+ 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
+
+		   sharedPref.edit().putBoolean("displayPrivacy", false).commit();
+                   sharedPref.edit().putBoolean("displayPrivacyKeep", true).commit();
+
+
        finish();
    }
 

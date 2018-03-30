@@ -69,6 +69,16 @@ public class MedicLog extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mediclog_layout);
+
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
+
+
+        if ( sharedPref.getBoolean("displayPrivacy",true) | sharedPref.getBoolean("displayPrivacyKeep",true) ) {
+    		Intent i = new Intent(this,DisplayPrivacy.class);
+		startActivity(i);
+               }
+
+
     }
 
     @Override
@@ -85,15 +95,19 @@ public class MedicLog extends Activity {
         @Override
 	    public boolean onOptionsItemSelected(MenuItem item) {
 	            switch (item.getItemId()) {
-		                case R.id.menu_item_preferences:
+	               case R.id.menu_item_preferences:
 		                //Toast.makeText(this, "ADD!", Toast.LENGTH_SHORT).show();
-	                Intent i = new Intent(this, MyPreferencesActivity.class);
-	                startActivity(i);
-	               return true;
-		               case R.id.menu_item_about:
+	                           Intent i = new Intent(this, MyPreferencesActivity.class);
+	                       startActivity(i);
+	                      return true;
+		        case R.id.menu_item_about:
 			       Intent j = new Intent(this,About.class);
 			       startActivity(j);
 			       return true;
+                         case R.id.menu_item_history:
+                                Intent k = new Intent(this,History.class);
+                                startActivity(k);
+                                return true;
 	               default:
 	                 return super.onOptionsItemSelected(item);
 	               }
@@ -196,13 +210,7 @@ public class MedicLog extends Activity {
     public void onStart() {
         super.onStart();
 
-	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
-	   if ( sharedPref.getBoolean("displayPrivacy",true)) {
-		Intent i = new Intent(this,DisplayPrivacy.class);
-		startActivity(i);
-
-	   }
-
+	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
 
 	try {
 	  readLog();
