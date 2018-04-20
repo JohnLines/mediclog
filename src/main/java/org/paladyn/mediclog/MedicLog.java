@@ -224,9 +224,11 @@ public class MedicLog extends Activity {
         Calendar calendar = Calendar.getInstance();
         
         SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	   if ( ! sharedPref.getBoolean("timeUTC",true)) {
-		   mdformat.setTimeZone(TimeZone.getDefault());
-	   }
+	   if ( sharedPref.getBoolean("timeUTC",true)) {
+		   mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
+	   } else {
+                   mdformat.setTimeZone(TimeZone.getDefault());
+           }
         String strDate = mdformat.format(calendar.getTime());
 	TextView dateView = (TextView) findViewById(R.id.date_view);
 	dateView.setText(strDate);
