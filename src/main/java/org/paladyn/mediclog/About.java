@@ -29,7 +29,10 @@ import android.text.Spanned;
 
 public class About extends Activity {
 
+
+
  @Override
+
  protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 	setContentView(R.layout.about_layout);
@@ -46,12 +49,15 @@ public class About extends Activity {
 
 	TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
 
+//    MedicLog m = (MedicLog)getApplication();
+
     Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
 	                + getString(R.string.about_text) + "<p>"
-			);
 // Following commented out until I can work out how to do it
-//			+ getString(R.string.records_read) + Integer.toString(MedicLog.numRecsReadFromFile) + "<br>"
-//			+ getString(R.string.records_appended) + String.valueOf(MedicLog.numRecsAppendedToFile) );
+//			+ getString(R.string.records_read) + Integer.toString(MainActivity.getNumRecsReadFromFile()) + "<br>"
+//			+ getString(R.string.records_appended) + String.valueOf(this.getApplication().getNumRecsAppendedToFile())
+
+                        );
 
         aboutTextView.setText(aboutText);
 

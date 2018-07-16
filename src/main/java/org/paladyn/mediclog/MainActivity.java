@@ -53,7 +53,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 
-public class MedicLog extends Activity {
+public class MainActivity extends Activity {
 
 
    final int defaultSystolic = 130;
@@ -61,9 +61,41 @@ public class MedicLog extends Activity {
    final int defaultHeartrate = 60;
    final int defaultTemperature = 363;
    final int defaultWeight = 750;
+/* we need to define the maximum length a line in the History Log can be */
+   public final int maxLogLineLength = 120;
 
-   public int numRecsReadFromFile=0;
+   public int histBuffLength=0;  /* the maximum length of the historyBuffer we have used */
+   public int histBuffIndex=0;   /* the place in the historyBuffer we are using */
+
+/* want to make maxHistBuffLen dynamic, but for now allocate statically */
+
+   public final int maxHistBuffLen = 31;
+  /* 31 = maxHistBuffLen, 120 = maxLogLineLength  */
+   public char historyBuffer[][] = new char[maxHistBuffLen][maxLogLineLength];
+
+
+  public int numRecsReadFromFile=0;
    public int numRecsAppendedToFile=0;
+
+ 
+ public void incNumRecsReadFromFile() {
+    numRecsReadFromFile++;
+    }
+
+ public void incNumRecsAppendedToFile() {
+    numRecsAppendedToFile++;
+    }
+
+ public int getNumRecsReadFromFile() {
+    return numRecsReadFromFile;
+    }
+
+ public int getNumRecsAppendedToFile() {
+    return numRecsAppendedToFile;
+    }
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -166,10 +198,16 @@ public class MedicLog extends Activity {
 		String line = reader.readLine();
 		while (line != null) {
 			lastline = line;
-			numRecsReadFromFile = numRecsReadFromFile + 1;
+//			numRecsReadFromFile = numRecsReadFromFile + 1;
+                        incNumRecsReadFromFile();
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Read line "+line);
 	                   }
+                           /* save the line in the history buffer */
+                           line.getChars(0,line.length(),historyBuffer[histBuffIndex],0);
+                           histBuffIndex++;
+                           if ( histBuffIndex >= maxHistBuffLen) { histBuffIndex = 0;   Log.d("mediclog","Set histBuffIndex to zero"); }
+                              /* need to check it is not long longer than the array and set back to zero if it has */
 			line = reader.readLine();
 	        }
 		if (lastline != null) {
