@@ -53,6 +53,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 
+
 public class MainActivity extends Activity {
 
 
@@ -61,40 +62,6 @@ public class MainActivity extends Activity {
    final int defaultHeartrate = 60;
    final int defaultTemperature = 363;
    final int defaultWeight = 750;
-/* we need to define the maximum length a line in the History Log can be */
-   public final int maxLogLineLength = 120;
-
-   public int histBuffLength=0;  /* the maximum length of the historyBuffer we have used */
-   public int histBuffIndex=0;   /* the place in the historyBuffer we are using */
-
-/* want to make maxHistBuffLen dynamic, but for now allocate statically */
-
-   public final int maxHistBuffLen = 31;
-  /* 31 = maxHistBuffLen, 120 = maxLogLineLength  */
-   public char historyBuffer[][] = new char[maxHistBuffLen][maxLogLineLength];
-
-
-  public int numRecsReadFromFile=0;
-   public int numRecsAppendedToFile=0;
-
- 
- public void incNumRecsReadFromFile() {
-    numRecsReadFromFile++;
-    }
-
- public void incNumRecsAppendedToFile() {
-    numRecsAppendedToFile++;
-    }
-
- public int getNumRecsReadFromFile() {
-    return numRecsReadFromFile;
-    }
-
- public int getNumRecsAppendedToFile() {
-    return numRecsAppendedToFile;
-    }
-
-
 
 
     @Override
@@ -174,7 +141,6 @@ public class MainActivity extends Activity {
 
 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
 
-// was final File file
 	File file = new File(getFilesDir(), sharedPref.getString("fileName","mediclog.txt") );
 
 	if (file.exists()) {
@@ -198,16 +164,16 @@ public class MainActivity extends Activity {
 		String line = reader.readLine();
 		while (line != null) {
 			lastline = line;
-//			numRecsReadFromFile = numRecsReadFromFile + 1;
-                        incNumRecsReadFromFile();
+
+                        MedicLog.getInstance(getApplicationContext()).incNumRecsReadFromFile();
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Read line "+line);
 	                   }
                            /* save the line in the history buffer */
-                           line.getChars(0,line.length(),historyBuffer[histBuffIndex],0);
-                           histBuffIndex++;
-                           if ( histBuffIndex >= maxHistBuffLen) { histBuffIndex = 0;   Log.d("mediclog","Set histBuffIndex to zero"); }
-                              /* need to check it is not long longer than the array and set back to zero if it has */
+                           MedicLog.getInstance(getApplicationContext()).putHistoryBuffer(line);
+                           /* increment the read index */
+                           MedicLog.getInstance(getApplicationContext()).incHistBuffReadIndex();
+                         
 			line = reader.readLine();
 	        }
 		if (lastline != null) {
@@ -240,7 +206,8 @@ public class MainActivity extends Activity {
 	                   Log.d("mediclog","ReadLog -about to create file "+file.getName());
 	                   }
 		createLog(file);
-	        }	       
+	        }
+	       
             } 
 
 
@@ -250,12 +217,14 @@ public class MainActivity extends Activity {
 
 	SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
 
+       if ( MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile()==0 ) {
+               if (BuildConfig.DEBUG) { Log.d("mediclog","Log has not been read yet - reading it now"); }
 	try {
 	  readLog();
 	}  catch (DataFormatException dfe) {
 		dfe.printStackTrace();
 	}
-
+        }
 	
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText("Medic Log - logs medical information");
@@ -449,7 +418,11 @@ public class MainActivity extends Activity {
 		fbw.newLine();
 		fbw.flush();
 		fbw.close();
-		numRecsAppendedToFile = numRecsAppendedToFile + 1;
+// Also append it to the buffer
+                MedicLog.getInstance(getApplicationContext()).putHistoryBuffer("1,"+strDate+","+systolicStr+","+diastolicStr+","+heartrateStr+","+tempStr+","+weightStr+","+commentStr);
+
+                MedicLog.getInstance(getApplicationContext()).incNumRecsAppendedToFile();
+                MedicLog.getInstance(getApplicationContext()).incHistBuffReadIndex();
 
 		Toast.makeText(getBaseContext(), "File saved successfully!",
 				Toast.LENGTH_SHORT).show();
@@ -490,6 +463,11 @@ public class MainActivity extends Activity {
               Button sendBtn=(Button)findViewById(R.id.btnSend);
               sendBtn.setVisibility(View.GONE);
 	      boolean deleted = file.delete();
+              MedicLog.getInstance(getApplicationContext()).clearNumRecsReadFromFile();
+              MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
+              MedicLog.getInstance(getApplicationContext()).clearHistBuffIndex();
+              MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
+
                         if (BuildConfig.DEBUG) {
 	                   Log.d("mediclog","Log file deleted");
 	                   }

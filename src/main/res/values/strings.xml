@@ -32,4 +32,5 @@
 	    ]]>
     </string>
     <string name="pref_privacy_group">Privacy Display Settings</string>
+    <string name="no_history">No History to Display</string>
 </resources>
