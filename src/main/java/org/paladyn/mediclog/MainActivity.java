@@ -34,6 +34,7 @@ import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.LayoutInflater;
@@ -51,6 +52,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.content.DialogInterface;
 
 
 
@@ -455,26 +457,44 @@ public class MainActivity extends Activity {
 	}
 
      public void onClickDelete(View view) {
-	   SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE); 
-              File dir = getFilesDir();
-	      File file = new File(dir, sharedPref.getString("fileName","mediclog.txt"));
-              Button deleteBtn=(Button)findViewById(R.id.btnDelete);
-              deleteBtn.setVisibility(View.GONE);
-              Button sendBtn=(Button)findViewById(R.id.btnSend);
-              sendBtn.setVisibility(View.GONE);
-	      boolean deleted = file.delete();
-              MedicLog.getInstance(getApplicationContext()).clearNumRecsReadFromFile();
-              MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
-              MedicLog.getInstance(getApplicationContext()).clearHistBuffIndex();
-              MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
 
-                        if (BuildConfig.DEBUG) {
-	                   Log.d("mediclog","Log file deleted");
-	                   }
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Delete file");
+            alert.setMessage("Are you sure you want to delete?");
+            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences",MODE_PRIVATE);
+                    File dir = getFilesDir();
+                    File file = new File(dir, sharedPref.getString("fileName","mediclog.txt"));
+                    Button deleteBtn=(Button)findViewById(R.id.btnDelete);
+                    deleteBtn.setVisibility(View.GONE);
+                    Button sendBtn=(Button)findViewById(R.id.btnSend);
+                    sendBtn.setVisibility(View.GONE);
+                    boolean deleted = file.delete();
+                    MedicLog.getInstance(getApplicationContext()).clearNumRecsReadFromFile();
+                    MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
+                    MedicLog.getInstance(getApplicationContext()).clearHistBuffIndex();
+                    MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
+
+                    if (BuildConfig.DEBUG) {
+                        Log.d("mediclog","Log file deleted");
+                    }
+                    dialog.dismiss();
+                }
+            });
+         alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+             public void onClick(DialogInterface dialog, int which) {
+                 // close dialog
+                 dialog.cancel();
+             }
+         });
+         alert.show();
+
+     }
+
 	   }
-
-
-}
 
 
 
