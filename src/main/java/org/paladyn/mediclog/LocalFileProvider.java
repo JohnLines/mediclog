@@ -19,6 +19,8 @@ package org.paladyn.mediclog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -39,9 +41,9 @@ public class LocalFileProvider extends ContentProvider {
 
 	@Override
 	    public boolean onCreate() {
-		            uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+	        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-	            // Add a URI to the matcher which will match against the form
+	        // Add a URI to the matcher which will match against the form
 		    // 'content://it.my.app.LogFileProvider/*'
 		    // and return 1 in the case that the incoming Uri matches this pattern
 		                 uriMatcher.addURI(AUTHORITY, "*", 1);
@@ -55,15 +57,14 @@ public class LocalFileProvider extends ContentProvider {
 
 		        String LOG_TAG = CLASS_NAME + " - openFile";
 
-			        Log.v(LOG_TAG,
-						                "Called with uri: '" + uri + "'." + uri.getLastPathSegment());
+//			        Log.v(LOG_TAG,"Called with uri: '" + uri + "'." + uri.getLastPathSegment());
 
 				        // Check incoming Uri against the matcher
 					        switch (uriMatcher.match(uri)) {
-				
-			                // If it returns 1 - then it matches the Uri defined in onCreate
-			         case 1:
-					//
+
+                                // If it returns 1 - then it matches the Uri defined in onCreate
+                                case 1:
+                                    //
 // The desired file name is specified by the last segment of the
 // path
 // E.g.
@@ -71,22 +72,35 @@ public class LocalFileProvider extends ContentProvider {
 // Take this and build the path to the file
 
 
-			String fileLocation = getContext().getFilesDir() + File.separator
-			                     + uri.getLastPathSegment();
+                                    String fileLocation = getContext().getFilesDir() + File.separator
+                                            + uri.getLastPathSegment();
+                                    // Protect against a possible Path Traversal vulnerablity by checking that the Cannonical
+                                    //  path starts with the right string
+//                                    Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
+                                    File f;
+                                    try {
+                                        f = new File(fileLocation);
+                                        if (!f.getCanonicalPath().startsWith(getContext().getFilesDir() + File.separator)) {
+                                            Log.v(LOG_TAG, "fileLocation: " + fileLocation + "is invalid");
+                                            throw new IllegalArgumentException();
+                                        }
+                                    } catch (IOException ex) {
+                                        Log.v(LOG_TAG, "About the throw FileNotFoundException");
+                                        throw new FileNotFoundException("Invalid path");
+                                    }
 
-                        // Create & return a ParcelFileDescriptor pointing to the file
-                       // Note: I don't care what mode they ask for - they're only getting
-                       // read only
-              ParcelFileDescriptor pfd = ParcelFileDescriptor.open(new File(
-	          fileLocation), ParcelFileDescriptor.MODE_READ_ONLY);
-		return pfd;
-		
-	// Otherwise unrecognised Uri
-	default:
-	 Log.v(LOG_TAG, "Unsupported uri: '" + uri + "'.");
-         throw new FileNotFoundException("Unsupported uri: "
-	    + uri.toString());
-	}
+                                    // Create & return a ParcelFileDescriptor pointing to the file
+                                    // Note: I don't care what mode they ask for - they're only getting
+                                    // read only
+                                    ParcelFileDescriptor pfd = ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY);
+                                    return pfd;
+
+                                // Otherwise unrecognised Uri
+                                default:
+                                    Log.v(LOG_TAG, "Unsupported uri: '" + uri + "'.");
+                                    throw new FileNotFoundException("Unsupported uri: "
+                                            + uri.toString());
+                            }
 	}
 
 
