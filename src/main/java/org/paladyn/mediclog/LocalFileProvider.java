@@ -58,6 +58,7 @@ public class LocalFileProvider extends ContentProvider {
 		        String LOG_TAG = CLASS_NAME + " - openFile";
 
 //			        Log.v(LOG_TAG,"Called with uri: '" + uri + "'." + uri.getLastPathSegment());
+// URI always look like content://org.paladyn.mediclog.LocalFileProvider/mediclog.txt
 
 				        // Check incoming Uri against the matcher
 					        switch (uriMatcher.match(uri)) {
@@ -76,12 +77,28 @@ public class LocalFileProvider extends ContentProvider {
                                             + uri.getLastPathSegment();
                                     // Protect against a possible Path Traversal vulnerablity by checking that the Cannonical
                                     //  path starts with the right string
-//                                    Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
+//                                   Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
                                     File f;
                                     try {
                                         f = new File(fileLocation);
-                                        if (!f.getCanonicalPath().startsWith(getContext().getFilesDir() + File.separator)) {
-                                            Log.v(LOG_TAG, "fileLocation: " + fileLocation + "is invalid");
+                                        String oldvalid = getContext().getFilesDir() + File.separator;
+                                        String newvalid = "/data/data/" + getContext().getPackageName() + "/files/";
+                                        Boolean ob = f.getCanonicalPath().startsWith(oldvalid);
+                                        Boolean nb = f.getCanonicalPath().startsWith(newvalid);
+//                                        Log.v(LOG_TAG, "oldvalid is " + oldvalid + "newvalid is " + newvalid);
+//                                        if (ob) {
+//                                            Log.v(LOG_TAG, "ob is true");
+//                                        }
+//                                        if (nb) {
+//                                            Log.v(LOG_TAG, "nb is true");
+//                                        }
+                                        if (!( ob || nb ))
+                                              {
+// The second case is a horrible kludge for API 28, where the path starts /data/data, as opposed to /data/user/0/
+
+                                            Log.v(LOG_TAG, "fileLocation: " + fileLocation + " is invalid");
+                                            Log.v(LOG_TAG, "f.getCannonicalPath is " + f.getCanonicalPath());
+                                            Log.v(LOG_TAG, "kludged path is /data/data/" + getContext().getPackageName() + "/files/");
                                             throw new IllegalArgumentException();
                                         }
                                     } catch (IOException ex) {
