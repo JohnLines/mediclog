@@ -3,58 +3,50 @@
     package="org.paladyn.mediclog">
 
 
-<!--  Am not currently using external storage, but being given it for compatibility
+    <!--  Am not currently using external storage, but being given it for compatibility
 
-	 <uses-permission 
-	    android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"
+         <uses-permission
+            android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"
 
-	    />
--->
+            />
+    -->
 
     <application
-	    android:label="@string/app_name"
-	    android:icon="@mipmap/ic_launcher" >
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name">
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-	<activity
-		android:name=".MyPreferencesActivity"
-		android:label="@string/preferences">
-	</activity>
+        <activity
+            android:name=".MyPreferencesActivity"
+            android:label="@string/preferences"></activity>
 
-	<activity
-		android:name=".About"
-		android:label="@string/about">
-	</activity>
+        <activity
+            android:name=".About"
+            android:label="@string/about"></activity>
 
-	<activity
-		android:name=".DisplayPrivacy"
-		android:label="@string/privacy">
-	</activity>
+        <activity
+            android:name=".DisplayPrivacy"
+            android:label="@string/privacy"></activity>
 
-	<activity
-		android:name=".History"
-		android:label="@string/history">
-	</activity>
+        <activity
+            android:name=".History"
+            android:label="@string/history"></activity>
 
 
-	<activity
-		android:name=".LocalContentProvider"
-		>
-	</activity>
+        <activity android:name=".LocalContentProvider"></activity>
 
-    <provider
-	    android:name="org.paladyn.mediclog.LocalFileProvider"
-	    android:exported="true"
-	    android:authorities="org.paladyn.mediclog.LocalFileProvider"
-	    />
+        <provider
+            android:name="org.paladyn.mediclog.LocalFileProvider"
+            android:authorities="org.paladyn.mediclog.LocalFileProvider"
+            android:exported="true" />
 
     </application>
 

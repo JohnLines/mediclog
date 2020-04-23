@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	  <EditTextPreference android:title="File name"
-                               android:key="fileName"
-	                       android:summary="The filename to store the Medic Log information"
-	                       android:defaultValue="mediclog.txt"
-			       />
+    <EditTextPreference
+        android:defaultValue="mediclog.txt"
+        android:key="fileName"
+        android:summary="The filename to store the Medic Log information"
+        android:title="File name" />
 
 
-	  <EditTextPreference android:title="Send To"
-                               android:key="sendTo"
-	                       android:summary="The default recipient to use in the Send Function."
-	                       android:defaultValue=""
-			       />
+    <EditTextPreference
+        android:defaultValue=""
+        android:key="sendTo"
+        android:summary="The default recipient to use in the Send Function."
+        android:title="Send To" />
 
-         <EditTextPreference android:title="Send Subject"
-				android:key="sendSubject"
-	       			android:summary="Subject to use in the Send Function."
-				android:defaultValue="MedicLog records"
-				/>
-         
-         <EditTextPreference android:title="History Length"
-				android:key="historyLength"
-	       			android:summary="Maximum number of records to go back in History"
-				android:defaultValue="40"
-				android:inputType="number"
-                                android:visibility="gone"
-				/>
-         
+    <EditTextPreference
+        android:defaultValue="MedicLog records"
+        android:key="sendSubject"
+        android:summary="Subject to use in the Send Function."
+        android:title="Send Subject" />
 
-	         <CheckBoxPreference android:title="Time in UTC"
-			 android:defaultValue="true"
-			android:summary="If selected the recorded times will be in UTC, otherwise in local time."
-			android:key="timeUTC"
-			/>
-
- <PreferenceCategory
-         android:title="@string/pref_privacy_group"
-                         >
-		<CheckBoxPreference android:title="Display Privacy Policy on first startup"
-			android:defaultValue="true"
-			android:summary="Display the Privacy Policy for MedicLog on startup."
-			android:key="displayPrivacy"
-			/>
+    <EditTextPreference
+        android:defaultValue="40"
+        android:inputType="number"
+        android:key="historyLength"
+        android:summary="Maximum number of records to go back in History"
+        android:title="History Length"
+        android:visibility="gone" />
 
 
-		<CheckBoxPreference android:title="Display Privacy Policy on each startup"
-			android:defaultValue="false"
-			android:summary="Display the Privacy Policy for MedicLog on each startup."
-			android:key="displayPrivacyKeep"
-			/>
- </PreferenceCategory>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="timeUTC"
+        android:summary="If selected the recorded times will be in UTC, otherwise in local time."
+        android:title="Time in UTC" />
+
+    <PreferenceCategory android:title="@string/pref_privacy_group">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="displayPrivacy"
+            android:summary="Display the Privacy Policy for MedicLog on startup."
+            android:title="Display Privacy Policy on first startup" />
 
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="displayPrivacyKeep"
+            android:summary="Display the Privacy Policy for MedicLog on each startup."
+            android:title="Display Privacy Policy on each startup" />
+    </PreferenceCategory>
 
-  </PreferenceScreen>
+
+</PreferenceScreen>

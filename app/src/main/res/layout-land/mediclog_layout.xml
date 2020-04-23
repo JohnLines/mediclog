@@ -1,428 +1,390 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-
-
-<TextView
-    android:id="@+id/text_view"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    />
-
-
-<TextView
-    android:id="@+id/date_view"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    />
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-
-<LinearLayout
-       	android:orientation="vertical"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-<TextView
-    android:id="@+id/bp_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:layout_weight="9"
-    />
-
-
- <ImageButton
-	 android:id="@+id/bpClear"
-	 android:src="@android:drawable/ic_menu_close_clear_cancel"
-	 android:onClick="onClickBpClear"
-	 android:layout_gravity="right"
-	 android:layout_weight="1"
-	 android:layout_width="45dp"
-	 android:layout_height="45dp"
-	 android:scaleType="fitCenter"
-	 />
-
- </LinearLayout>
-
-<LinearLayout
-	android:orientation="vertical"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
- <Button
-	 android:id="@+id/systolicMinus"
-	 android:text="-"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickSystolicMinus"
-	 />
-
-
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="number"
-	        android:ems="5"
-	        android:id="@+id/systolicText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text="130"
-	        android:maxLength="3" />
-
- <Button
-	 android:id="@+id/systolicPlus"
-	 android:text="+"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickSystolicPlus"
-	 />
-
- </LinearLayout>
-
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
- <Button
-	 android:id="@+id/diastolicMinus"
-	 android:text="-"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickDiastolicMinus"
-	 />
-
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="number"
-	        android:ems="5"
-	        android:id="@+id/diastolicText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text="80"
-	        android:maxLength="3" />
-
- <Button
-	 android:id="@+id/diastolicPlus"
-	 android:text="+"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickDiastolicPlus"
-	 />
-
- </LinearLayout>
-
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
- <Button
-	 android:id="@+id/hrateMinus"
-	 android:text="-"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickHrateMinus"
-	 />
-
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="number"
-	        android:ems="4"
-	        android:id="@+id/heartrateText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text="60"
-	        android:maxLength="3" />
-
- <Button
-	 android:id="@+id/hratePlus"
-	 android:text="+"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickHratePlus"
-	 />
-
- </LinearLayout>
-
-</LinearLayout>
-
-</LinearLayout>
-
-</LinearLayout>
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-
-<LinearLayout
-	android:orientation="vertical"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-<TextView
-    android:id="@+id/temp_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:layout_weight="9"
-    />
-
- <ImageButton
-	 android:id="@+id/tempClear"
-	 android:src="@android:drawable/ic_menu_close_clear_cancel"
-	 android:onClick="onClickTempClear"
-	 android:layout_gravity="right"
-	 android:layout_weight="1"
-	 android:layout_width="45dp"
-	 android:layout_height="45dp"
-	 android:scaleType="fitCenter"
-	 />
-
- </LinearLayout>
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
- <Button
-	 android:id="@+id/tempMinus"
-	 android:text="-"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickTempMinus"
-	 />
-
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="numberDecimal"
-	        android:ems="5"
-	        android:id="@+id/tempText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text="36.0"
-	        android:maxLength="5" />
-
- <Button
-	 android:id="@+id/tempPlus"
-	 android:text="+"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickTempPlus"
-	 />
-
-
- </LinearLayout>
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
-
-<TextView
-    android:id="@+id/weight_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:layout_weight="9"
-    />
-
- <ImageButton
-	 android:id="@+id/weightClear"
-	 android:src="@android:drawable/ic_menu_close_clear_cancel"
-	 android:onClick="onClickWeightClear"
-	 android:layout_gravity="right"
-	 android:layout_weight="1"
-	 android:layout_width="45dp"
-	 android:layout_height="45dp"
-	 android:scaleType="fitCenter"
-	 />
-
- </LinearLayout>
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	>
- <Button
-	 android:id="@+id/weightMinus"
-	 android:text="-"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickWeightMinus"
-	 />
-
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="numberDecimal"
-	        android:ems="5"
-	        android:id="@+id/weightText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text="75.0"
-	        android:maxLength="6" 
-   />
-
- <Button
-	 android:id="@+id/weightPlus"
-	 android:text="+"
-	 android:layout_width="wrap_content"
-	 android:layout_height="wrap_content"
-	 android:ems="2"
-	 android:onClick="onClickWeightPlus"
-	 />
-
- </LinearLayout>
-
-</LinearLayout>
-
-</LinearLayout>
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	>
-<EditText
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:inputType="textCapSentences|textAutoCorrect"
-	        android:id="@+id/commentText"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:text=""
-		android:layout_gravity="left"
-		android:layout_weight="9"
-   />
-
- <ImageButton
-	 android:id="@+id/commentClear"
-	 android:src="@android:drawable/ic_menu_close_clear_cancel"
-	 android:onClick="onClickCommentClear"
-	 android:layout_gravity="right"
-	 android:layout_weight="1"
-	 android:layout_width="45dp"
-	 android:layout_height="45dp"
-	 android:scaleType="fitCenter"
-	 />
-
- </LinearLayout>
-
-
-<LinearLayout
-	android:orientation="horizontal"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	>
-
-<Button
-		android:id="@+id/btnSave"
-		android:text="Save"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-		android:ems="6"
-		android:onClick="onClickSave"
-		/>
-
-<Button
-		android:id="@+id/btnSend"
-		android:text="Send"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-		android:ems="6"
-		android:onClick="onClickSend"
-                android:visibility="gone"
-		/>
-
-<Button
-		android:id="@+id/btnDelete"
-		android:text="Delete"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-		android:ems="6"
-
-		android:onClick="onClickDelete"
-                android:visibility="gone"
-		/>
-
- </LinearLayout>
-
-
-</LinearLayout>
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/date_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/bp_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="9" />
+
+
+                    <ImageButton
+                        android:id="@+id/bpClear"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:onClick="onClickBpClear"
+                        android:scaleType="fitCenter"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/systolicMinus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickSystolicMinus"
+                            android:text="-" />
+
+
+                        <EditText
+                            android:id="@+id/systolicText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:ems="5"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="130" />
+
+                        <Button
+                            android:id="@+id/systolicPlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickSystolicPlus"
+                            android:text="+" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/diastolicMinus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickDiastolicMinus"
+                            android:text="-" />
+
+                        <EditText
+                            android:id="@+id/diastolicText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:ems="5"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="80" />
+
+                        <Button
+                            android:id="@+id/diastolicPlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickDiastolicPlus"
+                            android:text="+" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/hrateMinus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickHrateMinus"
+                            android:text="-" />
+
+                        <EditText
+                            android:id="@+id/heartrateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:ems="4"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="60" />
+
+                        <Button
+                            android:id="@+id/hratePlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickHratePlus"
+                            android:text="+" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/temp_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="9" />
+
+                    <ImageButton
+                        android:id="@+id/tempClear"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:onClick="onClickTempClear"
+                        android:scaleType="fitCenter"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/tempMinus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="2"
+                        android:onClick="onClickTempMinus"
+                        android:text="-" />
+
+                    <EditText
+                        android:id="@+id/tempText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="5"
+                        android:inputType="numberDecimal"
+                        android:maxLength="5"
+                        android:text="36.0" />
+
+                    <Button
+                        android:id="@+id/tempPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="2"
+                        android:onClick="onClickTempPlus"
+                        android:text="+" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/weight_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="9" />
+
+                    <ImageButton
+                        android:id="@+id/weightClear"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:onClick="onClickWeightClear"
+                        android:scaleType="fitCenter"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/weightMinus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="2"
+                        android:onClick="onClickWeightMinus"
+                        android:text="-" />
+
+                    <EditText
+                        android:id="@+id/weightText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="5"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:text="75.0" />
+
+                    <Button
+                        android:id="@+id/weightPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="2"
+                        android:onClick="onClickWeightPlus"
+                        android:text="+" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/commentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="left"
+                android:layout_weight="9"
+                android:inputType="textCapSentences|textAutoCorrect"
+                android:text="" />
+
+            <ImageButton
+                android:id="@+id/commentClear"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:onClick="onClickCommentClear"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="6"
+                android:onClick="onClickSave"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="6"
+                android:onClick="onClickSend"
+                android:text="Send"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="6"
+                android:onClick="onClickDelete"
+
+                android:text="Delete"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>
 
