@@ -50,8 +50,8 @@ public class About extends Activity {
 
         Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
                 + getString(R.string.about_text) + "<p>"
-                + getString(R.string.records_read) + " " + Integer.toString(MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile()) + "<br>"
-                + getString(R.string.records_appended) + " " + String.valueOf(MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile())
+                + getString(R.string.records_read) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() + "<br>"
+                + getString(R.string.records_appended) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile()
 
         );
 

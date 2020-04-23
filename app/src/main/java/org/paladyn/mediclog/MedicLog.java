@@ -43,7 +43,7 @@ public class MedicLog {
     public int histBuffFirstReadIndex = 0;   /* the first place in the history buffer which was read */
     public int histBuffMaxReadIndex = 0;    /* the maximum number of history buffer records to read */
     /* 31 = maxHistBuffLen, 120 = maxLogLineLength  */
-    public char historyBuffer[][] = new char[maxHistBuffLen][maxLogLineLength];
+    public char[][] historyBuffer = new char[maxHistBuffLen][maxLogLineLength];
     public int numRecsReadFromFile = 0;
     public int numRecsAppendedToFile = 0;
     private Context context;
@@ -163,10 +163,9 @@ public class MedicLog {
 //       Log.d("mediclog","Reset histBuffReadIndex to HistBuffIndex "+histBuffReadIndex);
 
         }
-        ;
         histBuffFirstReadIndex = histBuffReadIndex;
 
-        char histBuffLine[] = historyBuffer[histBuffReadIndex];
+        char[] histBuffLine = historyBuffer[histBuffReadIndex];
 
         String line = String.valueOf(histBuffLine);
 
@@ -174,7 +173,6 @@ public class MedicLog {
         if (histBuffReadIndex == histBuffMaxReadIndex) {
             return null;
         }
-        ;
 
         histBuffReadIndex++;
 
@@ -182,14 +180,13 @@ public class MedicLog {
         if (histBuffReadIndex > maxHistBuffLen) {
             histBuffReadIndex = 0;
         }
-        ;
 
         return line;
     }
 
     public String getHistoryBufferNextLine() {
 // return the next line from the HistoryBuffer,
-        char histBuffLine[] = historyBuffer[histBuffReadIndex];
+        char[] histBuffLine = historyBuffer[histBuffReadIndex];
 
         String line = String.valueOf(histBuffLine);
 
@@ -200,7 +197,6 @@ public class MedicLog {
 //       Log.d("mediclog","getHistoryBufferNextLine - back to start");
             return null;
         }
-        ;
 
 
 // if we have hit the number of records in the buffer, return null
@@ -208,7 +204,6 @@ public class MedicLog {
 //         Log.d("mediclog","getHistoryBufferNextLines - "+histBuffReadIndex+" reached max "+histBuffMaxReadIndex);
             return null;
         }
-        ;
 
         histBuffReadIndex++;
 
@@ -216,7 +211,6 @@ public class MedicLog {
         if (histBuffReadIndex >= maxHistBuffLen) {
             histBuffReadIndex = 0;
         }
-        ;
 
 
         return line;
