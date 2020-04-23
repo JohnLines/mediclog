@@ -29,13 +29,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
 public class LocalFileProvider extends ContentProvider {
 
     public static final String AUTHORITY = "org.paladyn.mediclog.LocalFileProvider";
     private static final String CLASS_NAME = "LocalFileProvider";
     private UriMatcher uriMatcher;
-
 
     @Override
     public boolean onCreate() {
@@ -55,27 +53,26 @@ public class LocalFileProvider extends ContentProvider {
 
         String LOG_TAG = CLASS_NAME + " - openFile";
 
-//			        Log.v(LOG_TAG,"Called with uri: '" + uri + "'." + uri.getLastPathSegment());
-// URI always look like content://org.paladyn.mediclog.LocalFileProvider/mediclog.txt
+        //Log.v(LOG_TAG, "Called with uri: '" + uri + "'." + uri.getLastPathSegment());
+        // URI always look like content://org.paladyn.mediclog.LocalFileProvider/mediclog.txt
 
         // Check incoming Uri against the matcher
         switch (uriMatcher.match(uri)) {
 
             // If it returns 1 - then it matches the Uri defined in onCreate
             case 1:
-                //
-// The desired file name is specified by the last segment of the
-// path
-// E.g.
-// 'content://it.my.app.LogFileProvider/Test.txt'
-// Take this and build the path to the file
 
+                // The desired file name is specified by the last segment of the
+                // path
+                // E.g.
+                // 'content://it.my.app.LogFileProvider/Test.txt'
+                // Take this and build the path to the file
 
                 String fileLocation = getContext().getFilesDir() + File.separator
                         + uri.getLastPathSegment();
-                // Protect against a possible Path Traversal vulnerablity by checking that the Cannonical
-                //  path starts with the right string
-//                                   Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
+                // Protect against a possible Path Traversal vulnerability by checking that the Cannonical
+                // path starts with the right string
+                //Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
                 File f;
                 try {
                     f = new File(fileLocation);
@@ -83,15 +80,18 @@ public class LocalFileProvider extends ContentProvider {
                     String newvalid = "/data/data/" + getContext().getPackageName() + "/files/";
                     Boolean ob = f.getCanonicalPath().startsWith(oldvalid);
                     Boolean nb = f.getCanonicalPath().startsWith(newvalid);
-//                                        Log.v(LOG_TAG, "oldvalid is " + oldvalid + "newvalid is " + newvalid);
-//                                        if (ob) {
-//                                            Log.v(LOG_TAG, "ob is true");
-//                                        }
-//                                        if (nb) {
-//                                            Log.v(LOG_TAG, "nb is true");
-//                                        }
+/*
+                    Log.v(LOG_TAG, "oldvalid is " + oldvalid + "newvalid is " + newvalid);
+                    if (ob) {
+                        Log.v(LOG_TAG, "ob is true");
+                    }
+                    if (nb) {
+                        Log.v(LOG_TAG, "nb is true");
+                    }
+*/
                     if (!(ob || nb)) {
-// The second case is a horrible kludge for API 28, where the path starts /data/data, as opposed to /data/user/0/
+                        // The second case is a horrible kludge for API 28, where the path starts
+                        // /data/data, as opposed to /data/user/0/
 
                         Log.v(LOG_TAG, "fileLocation: " + fileLocation + " is invalid");
                         Log.v(LOG_TAG, "f.getCannonicalPath is " + f.getCanonicalPath());
@@ -104,8 +104,7 @@ public class LocalFileProvider extends ContentProvider {
                 }
 
                 // Create & return a ParcelFileDescriptor pointing to the file
-                // Note: I don't care what mode they ask for - they're only getting
-                // read only
+                // Note: I don't care what mode they ask for - they're only getting read only
                 ParcelFileDescriptor pfd = ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY);
                 return pfd;
 
@@ -117,10 +116,8 @@ public class LocalFileProvider extends ContentProvider {
         }
     }
 
-
     @Override
-    public int update(Uri uri, ContentValues contentvalues, String s,
-                      String[] as) {
+    public int update(Uri uri, ContentValues contentvalues, String s, String[] as) {
         return 0;
     }
 
@@ -140,10 +137,7 @@ public class LocalFileProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String s, String[] as1,
-                        String s1) {
+    public Cursor query(Uri uri, String[] projection, String s, String[] as1, String s1) {
         return null;
     }
-
-
 }

@@ -7,12 +7,8 @@
         android:title="@string/about" />
     <item
         android:id="@+id/menu_item_preferences"
-        android:title="@string/preferences"
-
-        />
+        android:title="@string/preferences" />
     <item
         android:id="@+id/menu_item_history"
-        android:title="@string/history"
-
-        />
+        android:title="@string/history" />
 </menu>

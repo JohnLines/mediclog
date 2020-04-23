@@ -30,11 +30,9 @@ public class History extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_layout);
 
-
         TextView historyTextView = (TextView) findViewById(R.id.history_text_view);
 
         final SpannableStringBuilder sb = new SpannableStringBuilder();
-
 
         if (MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() +
                 MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile() == 0) {
@@ -42,14 +40,14 @@ public class History extends Activity {
         } else {
 
             String line = MedicLog.getInstance(getApplicationContext()).getHistoryBufferFirstLine();
-//          Log.d("mediclog","History - first line *"+line+"*");
+            // Log.d("mediclog", "History - first line *" + line + "*");
             while (line != null) {
 
                 String[] values = line.split(",");
                 if (values.length == 1) {
                     sb.append("Something has gone wrong - line is " + line);
                     historyTextView.setText(sb);
-//                    Log.d("mediclog","History - something wrong *"+line+"*");
+                    // Log.d("mediclog", "History - something wrong *" + line + "*");
                     return;
                 }
                 if (values.length > 0) {
@@ -64,26 +62,22 @@ public class History extends Activity {
                 if (values.length > 6) {
                     sb.append(values[6]);
                 }
-
                 if (values.length > 7 && values[7].length() > 0) {
                     sb.append("\n" + values[7]);
                 }
 
                 sb.append("\n");
                 line = MedicLog.getInstance(getApplicationContext()).getHistoryBufferNextLine();
-//          Log.d("mediclog","History - line *"+line+"*");
+                // Log.d("mediclog", "History - line *" + line + "*");
             }
         }
 
-//      historyTextView.setText(Html.fromHtml(sb));
+        // historyTextView.setText(Html.fromHtml(sb));
         historyTextView.setText(sb);
 
-
         sb.clear();
-        /*       Log.d("mediclog","History - sb cleared");  */
+        // Log.d("mediclog", "History - sb cleared");
         MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
-
-
     }
 
 

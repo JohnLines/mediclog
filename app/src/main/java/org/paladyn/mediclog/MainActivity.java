@@ -15,7 +15,6 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-
 package org.paladyn.mediclog;
 
 import android.app.Activity;
@@ -48,16 +47,13 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
-
 public class MainActivity extends Activity {
-
 
     final int defaultSystolic = 130;
     final int defaultDiastolic = 80;
     final int defaultHeartrate = 60;
     final int defaultTemperature = 363;
     final int defaultWeight = 750;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,13 +62,10 @@ public class MainActivity extends Activity {
 
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
-
         if (sharedPref.getBoolean("displayPrivacy", true) | sharedPref.getBoolean("displayPrivacyKeep", true)) {
             Intent i = new Intent(this, DisplayPrivacy.class);
             startActivity(i);
         }
-
-
     }
 
     @Override
@@ -81,7 +74,6 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
 
     /**
      * * react to the user tapping/selecting an options menu item
@@ -127,10 +119,8 @@ public class MainActivity extends Activity {
         }
     }
 
-
     private void readLog() throws DataFormatException {
-
-//   Read in existing log entries until end of file
+        // Read in existing log entries until end of file
         FileInputStream is;
         BufferedReader reader;
 
@@ -153,7 +143,7 @@ public class MainActivity extends Activity {
                 String header = reader.readLine();
                 String[] hvals = header.split(",");
                 if (!hvals[0].equals("MedicLog 1.0")) {
-//			throw new DataFormatException("MedicLog -Unknown format type *"+hvals[0]+"*");
+                    //throw new DataFormatException("MedicLog -Unknown format type *" + hvals[0] + "*");
                     Log.w("mediclog", "Unknown format type " + hvals[0]);
                 }
                 String line = reader.readLine();
@@ -164,21 +154,21 @@ public class MainActivity extends Activity {
                     if (BuildConfig.DEBUG) {
                         Log.d("mediclog", "Read line " + line);
                     }
-                    /* save the line in the history buffer */
+                    // save the line in the history buffer
                     MedicLog.getInstance(getApplicationContext()).putHistoryBuffer(line);
-                    /* increment the read index */
+                    // increment the read index
                     MedicLog.getInstance(getApplicationContext()).incHistBuffReadIndex();
 
                     line = reader.readLine();
                 }
+
                 if (lastline != null) {
                     String[] values = lastline.split(",");
                     recordFormat = values[0];
                     // recordFormat should always be 1 at the moment
                     if (!recordFormat.equals("1")) {
-
                         throw new DataFormatException("MedicLog Unknown record format *" + recordFormat + "*");
-//			Log.d("mediclog","Unknown record format *"+recordFormat+"*");
+                        //Log.d("mediclog", "Unknown record format *" + recordFormat + "*");
                     }
                     EditText systolicText = (EditText) findViewById(R.id.systolicText);
                     if (values.length > 2 && values[2] != null) {
@@ -212,9 +202,7 @@ public class MainActivity extends Activity {
             }
             createLog(file);
         }
-
     }
-
 
     @Override
     public void onStart() {
@@ -252,8 +240,6 @@ public class MainActivity extends Activity {
         tempView.setText("Temperature");
         TextView weightView = (TextView) findViewById(R.id.weight_view);
         weightView.setText("Weight");
-
-
     }
 
     public void onClickBpClear(View view) {
@@ -263,7 +249,6 @@ public class MainActivity extends Activity {
         diastolicText.setText("");
         EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
         heartrateText.setText("");
-
     }
 
     public void onClickSystolicMinus(View view) {
@@ -274,7 +259,6 @@ public class MainActivity extends Activity {
         systolic = systolic - 1;
         systolicStr = String.format("%d", systolic);
         systolicText.setText(systolicStr);
-
     }
 
     public void onClickSystolicPlus(View view) {
@@ -293,7 +277,6 @@ public class MainActivity extends Activity {
         diastolic = diastolic - 1;
         diastolicStr = String.format("%d", diastolic);
         diastolicText.setText(diastolicStr);
-
     }
 
     public void onClickDiastolicPlus(View view) {
@@ -305,7 +288,6 @@ public class MainActivity extends Activity {
         diastolicText.setText(diastolicStr);
     }
 
-
     public void onClickHrateMinus(View view) {
         EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
         String heartrateStr = heartrateText.getText().toString();
@@ -313,7 +295,6 @@ public class MainActivity extends Activity {
         heartrate = heartrate - 1;
         heartrateStr = String.format("%d", heartrate);
         heartrateText.setText(heartrateStr);
-
     }
 
     public void onClickHratePlus(View view) {
@@ -325,12 +306,10 @@ public class MainActivity extends Activity {
         heartrateText.setText(heartrateStr);
     }
 
-
     public void onClickTempClear(View view) {
         EditText tempText = (EditText) findViewById(R.id.tempText);
         tempText.setText("");
     }
-
 
     public void onClickTempMinus(View view) {
         EditText tempText = (EditText) findViewById(R.id.tempText);
@@ -341,8 +320,6 @@ public class MainActivity extends Activity {
         tempStr = String.format("%d", temp);
         tempStr2 = new StringBuilder(tempStr).insert(tempStr.length() - 1, ".").toString();
         tempText.setText(tempStr2);
-
-
     }
 
     public void onClickTempPlus(View view) {
@@ -370,7 +347,6 @@ public class MainActivity extends Activity {
         weightStr = String.format("%d", weight);
         weightStr2 = new StringBuilder(weightStr).insert(weightStr.length() - 1, ".").toString();
         weightText.setText(weightStr2);
-
     }
 
     public void onClickWeightPlus(View view) {
@@ -382,8 +358,6 @@ public class MainActivity extends Activity {
         weightStr = String.format("%d", weight);
         weightStr2 = new StringBuilder(weightStr).insert(weightStr.length() - 1, ".").toString();
         weightText.setText(weightStr2);
-
-
     }
 
     public void onClickCommentClear(View view) {
@@ -425,7 +399,7 @@ public class MainActivity extends Activity {
             fbw.newLine();
             fbw.flush();
             fbw.close();
-// Also append it to the buffer
+            // Also append it to the buffer
             MedicLog.getInstance(getApplicationContext()).putHistoryBuffer("1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + commentStr);
 
             MedicLog.getInstance(getApplicationContext()).incNumRecsAppendedToFile();
@@ -438,7 +412,6 @@ public class MainActivity extends Activity {
         }
     }
 
-
     public void onClickSend(View view) {
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
@@ -447,25 +420,19 @@ public class MainActivity extends Activity {
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo", "").split(","));
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, sharedPref.getString("sendSubject", "MedicLog"));
 
-//  put something to pick up the attachment
-//
+        // Put something to pick up the attachment
         emailIntent.putExtra(
                 android.content.Intent.EXTRA_STREAM, Uri.parse("content://" + LocalFileProvider.AUTHORITY + "/"
                         + sharedPref.getString("fileName", "mediclog.txt")));
 
-
         this.startActivity(Intent.createChooser(emailIntent, "Sending email..."));
-
-
     }
 
     public void onClickDelete(View view) {
-
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Delete file");
         alert.setMessage("Are you sure you want to delete?");
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
@@ -494,11 +461,5 @@ public class MainActivity extends Activity {
             }
         });
         alert.show();
-
     }
-
 }
-
-
-
-

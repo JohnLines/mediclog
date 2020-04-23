@@ -26,7 +26,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-
 public class DisplayPrivacy extends Activity {
 
     @Override
@@ -38,7 +37,6 @@ public class DisplayPrivacy extends Activity {
             Log.d("mediclog", "DisplayPrivacy");
         }
 
-
         TextView privacyTextView = (TextView) findViewById(R.id.privacy_text_view);
 
         Spanned privacyText = Html.fromHtml(
@@ -46,12 +44,9 @@ public class DisplayPrivacy extends Activity {
         );
 
         privacyTextView.setText(privacyText);
-
-
     }
 
     public void onClickAccept(View view) {
-
         if (BuildConfig.DEBUG) {
             Log.d("mediclog", "Accept Privacy - before update");
         }
@@ -59,7 +54,7 @@ public class DisplayPrivacy extends Activity {
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
         sharedPref.edit().putBoolean("displayPrivacy", false).commit();
-        //                  sharedPref.edit().putBoolean("displayPrivacyKeep", false).commit();
+        // sharedPref.edit().putBoolean("displayPrivacyKeep", false).commit();
 
         if (BuildConfig.DEBUG) {
             Log.d("mediclog", "Accept Privacy - after update");
@@ -68,20 +63,16 @@ public class DisplayPrivacy extends Activity {
     }
 
     public void onClickAcceptKeep(View view) {
-
         if (BuildConfig.DEBUG) {
             Log.d("mediclog", "AcceptKeep Privacy - before update");
         }
-// Don't adjust privacy settings
+
+        // Don't adjust privacy settings
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
         sharedPref.edit().putBoolean("displayPrivacy", false).commit();
         sharedPref.edit().putBoolean("displayPrivacyKeep", true).commit();
 
-
         finish();
     }
-
-
 }
-

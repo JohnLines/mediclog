@@ -23,7 +23,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
-
 public class MyPreferencesActivity extends PreferenceActivity {
 
     @Override
@@ -31,37 +30,32 @@ public class MyPreferencesActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
 
-// This was intended to make 3 checkboxes work as a radio button, but crashed on running, for now just use two check boxes
+        // This was intended to make 3 checkboxes work as a radio button, but crashed on running, for now just use two check boxes
+/*
+        Preference displayPrivacy = (Preference) findPreference("displayPrivacy");
+        displayPrivacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference thispref) {
+                Log.d("mediclog", "displayPrivacy selected");
+                return true;
+            }
+        });
 
-//    Preference displayPrivacy = (Preference) findPreference("displayPrivacy");
-//      displayPrivacy.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-//     @Override
-//       public boolean onPreferenceClick(Preference thispref) {
-//                Log.d("mediclog","displayPrivacy selected");
-//                return true;
-//             }
-//        });
-
-//    Preference hidePrivacy = (Preference) findPreference("hidePrivacy");
-//      hidePrivacy.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-//     @Override
-//       public boolean onPreferenceClick(Preference thispref) {
-//                Log.d("mediclog","hidePrivacy selected");
-//                return true;
-//             }
-//        });
-
-
+        Preference hidePrivacy = (Preference) findPreference("hidePrivacy");
+        hidePrivacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference thispref) {
+                Log.d("mediclog", "hidePrivacy selected");
+                return true;
+            }
+        });
+*/
     }
-
 
     public boolean onClickDisplayPrivacy(Preference thispref) {
         Log.d("mediclog", "displayPrivacy selected");
         return true;
     }
-
 
     public static class MyPreferenceFragment extends PreferenceFragment {
         @Override
@@ -70,7 +64,4 @@ public class MyPreferencesActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.preferences);
         }
     }
-
-
 }
-

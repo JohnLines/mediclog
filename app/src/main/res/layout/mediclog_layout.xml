@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -13,7 +12,6 @@
             android:id="@+id/text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-
 
         <TextView
             android:id="@+id/date_view"
@@ -32,7 +30,6 @@
                 android:layout_gravity="left"
                 android:layout_weight="9" />
 
-
             <ImageButton
                 android:id="@+id/bpClear"
                 android:layout_width="45dp"
@@ -44,7 +41,6 @@
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -58,7 +54,6 @@
                 android:ems="2"
                 android:onClick="onClickSystolicMinus"
                 android:text="-" />
-
 
             <EditText
                 android:id="@+id/systolicText"
@@ -82,7 +77,6 @@
                 android:text="+" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -120,7 +114,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -156,7 +149,6 @@
                 android:text="+" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -215,7 +207,6 @@
                 android:ems="2"
                 android:onClick="onClickTempPlus"
                 android:text="+" />
-
 
         </LinearLayout>
 
@@ -309,7 +300,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -342,7 +332,6 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

@@ -15,7 +15,6 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-
 package org.paladyn.mediclog;
 
 import android.app.Activity;
@@ -28,13 +27,10 @@ import android.widget.TextView;
 
 public class About extends Activity {
 
-
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_layout);
-
 
         String versionName = "";
 
@@ -47,19 +43,12 @@ public class About extends Activity {
 
         TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
 
-
         Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
                 + getString(R.string.about_text) + "<p>"
                 + getString(R.string.records_read) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() + "<br>"
                 + getString(R.string.records_appended) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile()
-
         );
 
         aboutTextView.setText(aboutText);
-
-
     }
-
-
 }
-
