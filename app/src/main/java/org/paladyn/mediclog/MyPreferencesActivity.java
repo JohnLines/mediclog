@@ -17,12 +17,11 @@
 
 package org.paladyn.mediclog;
 
-import android.util.Log;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
+import android.util.Log;
 
 
 public class MyPreferencesActivity extends PreferenceActivity {

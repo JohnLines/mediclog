@@ -18,12 +18,9 @@
 
 package org.paladyn.mediclog;
 
-import java.util.Arrays;
-
-
 import android.content.Context;
-import android.util.Log;
-import android.content.SharedPreferences;
+
+import java.util.Arrays;
 
 
 public class MedicLog {

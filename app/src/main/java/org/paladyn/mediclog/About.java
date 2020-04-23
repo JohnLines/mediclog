@@ -18,14 +18,13 @@
 
 package org.paladyn.mediclog;
 
-import android.os.Bundle;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageInfo;
 import android.app.Activity;
-import android.view.View;
-import android.widget.TextView;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.TextView;
 
 public class About extends Activity {
 

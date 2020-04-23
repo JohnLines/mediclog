@@ -18,16 +18,10 @@
 
 package org.paladyn.mediclog;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.View;
-import android.widget.TextView;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.Spannable;
+import android.os.Bundle;
 import android.text.SpannableStringBuilder;
-
-import android.util.Log;
+import android.widget.TextView;
 
 public class History extends Activity {
 
