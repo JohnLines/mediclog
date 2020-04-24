@@ -32,22 +32,16 @@ public class MyPreferencesActivity extends PreferenceActivity {
 
         // This was intended to make 3 checkboxes work as a radio button, but crashed on running, for now just use two check boxes
 /*
-        Preference displayPrivacy = (Preference) findPreference("displayPrivacy");
-        displayPrivacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference thispref) {
-                Log.d("mediclog", "displayPrivacy selected");
-                return true;
-            }
+        Preference displayPrivacy = findPreference("displayPrivacy");
+        displayPrivacy.setOnPreferenceClickListener(thispref -> {
+            Log.d("mediclog", "displayPrivacy selected");
+            return true;
         });
 
-        Preference hidePrivacy = (Preference) findPreference("hidePrivacy");
-        hidePrivacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference thispref) {
-                Log.d("mediclog", "hidePrivacy selected");
-                return true;
-            }
+        Preference hidePrivacy = findPreference("hidePrivacy");
+        hidePrivacy.setOnPreferenceClickListener(thispref -> {
+            Log.d("mediclog", "hidePrivacy selected");
+            return true;
         });
 */
     }

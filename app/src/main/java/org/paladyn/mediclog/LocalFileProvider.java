@@ -57,29 +57,25 @@ public class LocalFileProvider extends ContentProvider {
         // URI always look like content://org.paladyn.mediclog.LocalFileProvider/mediclog.txt
 
         // Check incoming Uri against the matcher
-        switch (uriMatcher.match(uri)) {
+        // If it returns 1 - then it matches the Uri defined in onCreate
+        if (uriMatcher.match(uri) == 1) {// The desired file name is specified by the last segment of the
+            // path
+            // E.g.
+            // 'content://it.my.app.LogFileProvider/Test.txt'
+            // Take this and build the path to the file
 
-            // If it returns 1 - then it matches the Uri defined in onCreate
-            case 1:
-
-                // The desired file name is specified by the last segment of the
-                // path
-                // E.g.
-                // 'content://it.my.app.LogFileProvider/Test.txt'
-                // Take this and build the path to the file
-
-                String fileLocation = getContext().getFilesDir() + File.separator
-                        + uri.getLastPathSegment();
-                // Protect against a possible Path Traversal vulnerability by checking that the Cannonical
-                // path starts with the right string
-                //Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
-                File f;
-                try {
-                    f = new File(fileLocation);
-                    String oldvalid = getContext().getFilesDir() + File.separator;
-                    String newvalid = "/data/data/" + getContext().getPackageName() + "/files/";
-                    Boolean ob = f.getCanonicalPath().startsWith(oldvalid);
-                    Boolean nb = f.getCanonicalPath().startsWith(newvalid);
+            String fileLocation = getContext().getFilesDir() + File.separator
+                    + uri.getLastPathSegment();
+            // Protect against a possible Path Traversal vulnerability by checking that the Cannonical
+            // path starts with the right string
+            //Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
+            File f;
+            try {
+                f = new File(fileLocation);
+                String oldvalid = getContext().getFilesDir() + File.separator;
+                String newvalid = "/data/data/" + getContext().getPackageName() + "/files/";
+                Boolean ob = f.getCanonicalPath().startsWith(oldvalid);
+                Boolean nb = f.getCanonicalPath().startsWith(newvalid);
 /*
                     Log.v(LOG_TAG, "oldvalid is " + oldvalid + "newvalid is " + newvalid);
                     if (ob) {
@@ -89,31 +85,29 @@ public class LocalFileProvider extends ContentProvider {
                         Log.v(LOG_TAG, "nb is true");
                     }
 */
-                    if (!(ob || nb)) {
-                        // The second case is a horrible kludge for API 28, where the path starts
-                        // /data/data, as opposed to /data/user/0/
+                if (!(ob || nb)) {
+                    // The second case is a horrible kludge for API 28, where the path starts
+                    // /data/data, as opposed to /data/user/0/
 
-                        Log.v(LOG_TAG, "fileLocation: " + fileLocation + " is invalid");
-                        Log.v(LOG_TAG, "f.getCannonicalPath is " + f.getCanonicalPath());
-                        Log.v(LOG_TAG, "kludged path is /data/data/" + getContext().getPackageName() + "/files/");
-                        throw new IllegalArgumentException();
-                    }
-                } catch (IOException ex) {
-                    Log.v(LOG_TAG, "About the throw FileNotFoundException");
-                    throw new FileNotFoundException("Invalid path");
+                    Log.v(LOG_TAG, "fileLocation: " + fileLocation + " is invalid");
+                    Log.v(LOG_TAG, "f.getCanonicalPath is " + f.getCanonicalPath());
+                    Log.v(LOG_TAG, "kludged path is /data/data/" + getContext().getPackageName() + "/files/");
+                    throw new IllegalArgumentException();
                 }
+            } catch (IOException ex) {
+                Log.v(LOG_TAG, "About the throw FileNotFoundException");
+                throw new FileNotFoundException("Invalid path");
+            }
 
-                // Create & return a ParcelFileDescriptor pointing to the file
-                // Note: I don't care what mode they ask for - they're only getting read only
-                ParcelFileDescriptor pfd = ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY);
-                return pfd;
+            // Create & return a ParcelFileDescriptor pointing to the file
+            // Note: I don't care what mode they ask for - they're only getting read only
+            return ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY);
 
             // Otherwise unrecognised Uri
-            default:
-                Log.v(LOG_TAG, "Unsupported uri: '" + uri + "'.");
-                throw new FileNotFoundException("Unsupported uri: "
-                        + uri.toString());
         }
+        Log.v(LOG_TAG, "Unsupported uri: '" + uri + "'.");
+        throw new FileNotFoundException("Unsupported uri: "
+                + uri.toString());
     }
 
     @Override

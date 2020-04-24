@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -27,14 +27,14 @@
                 android:id="@+id/bp_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_weight="9" />
 
             <ImageButton
                 android:id="@+id/bpClear"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_weight="1"
                 android:onClick="onClickBpClear"
                 android:scaleType="fitCenter"
@@ -59,10 +59,6 @@
                 android:id="@+id/systolicText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:ems="5"
                 android:inputType="number"
                 android:maxLength="3"
@@ -95,10 +91,6 @@
                 android:id="@+id/diastolicText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:ems="5"
                 android:inputType="number"
                 android:maxLength="3"
@@ -131,10 +123,6 @@
                 android:id="@+id/heartrateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:ems="4"
                 android:inputType="number"
                 android:maxLength="3"
@@ -159,14 +147,14 @@
                 android:id="@+id/temp_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_weight="9" />
 
             <ImageButton
                 android:id="@+id/tempClear"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_weight="1"
                 android:onClick="onClickTempClear"
                 android:scaleType="fitCenter"
@@ -191,10 +179,6 @@
                 android:id="@+id/tempText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:ems="5"
                 android:inputType="numberDecimal"
                 android:maxLength="5"
@@ -219,14 +203,14 @@
                 android:id="@+id/weight_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_weight="9" />
 
             <ImageButton
                 android:id="@+id/weightClear"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_weight="1"
                 android:onClick="onClickWeightClear"
                 android:scaleType="fitCenter"
@@ -251,10 +235,6 @@
                 android:id="@+id/weightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:ems="5"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
@@ -279,11 +259,7 @@
                 android:id="@+id/commentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_weight="9"
                 android:inputType="textCapSentences|textAutoCorrect"
                 android:text="" />
@@ -292,7 +268,7 @@
                 android:id="@+id/commentClear"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_weight="1"
                 android:onClick="onClickCommentClear"
                 android:scaleType="fitCenter"
@@ -301,34 +277,38 @@
         </LinearLayout>
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnSave"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
                 android:onClick="onClickSave"
-                android:text="Save" />
+                android:text="@string/save" />
 
             <Button
                 android:id="@+id/btnSend"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
                 android:onClick="onClickSend"
-                android:text="Send"
+                android:text="@string/send"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnDelete"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
                 android:onClick="onClickDelete"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:visibility="gone" />
 
         </LinearLayout>

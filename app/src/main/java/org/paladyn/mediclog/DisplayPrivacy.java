@@ -53,7 +53,7 @@ public class DisplayPrivacy extends Activity {
 
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
-        sharedPref.edit().putBoolean("displayPrivacy", false).commit();
+        sharedPref.edit().putBoolean("displayPrivacy", false).apply();
         // sharedPref.edit().putBoolean("displayPrivacyKeep", false).commit();
 
         if (BuildConfig.DEBUG) {
@@ -70,8 +70,8 @@ public class DisplayPrivacy extends Activity {
         // Don't adjust privacy settings
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
 
-        sharedPref.edit().putBoolean("displayPrivacy", false).commit();
-        sharedPref.edit().putBoolean("displayPrivacyKeep", true).commit();
+        sharedPref.edit().putBoolean("displayPrivacy", false).apply();
+        sharedPref.edit().putBoolean("displayPrivacyKeep", true).apply();
 
         finish();
     }

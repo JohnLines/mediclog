@@ -19,7 +19,6 @@ package org.paladyn.mediclog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -195,7 +194,7 @@ public class MainActivity extends Activity {
                 ioe.printStackTrace();
             }
         } else {
-            Toast.makeText(getBaseContext(), "File does not exist",
+            Toast.makeText(getBaseContext(), R.string.file_doesnt_exist,
                     Toast.LENGTH_SHORT).show();
             if (BuildConfig.DEBUG) {
                 Log.d("mediclog", "ReadLog -about to create file " + file.getName());
@@ -222,7 +221,7 @@ public class MainActivity extends Activity {
         }
 
         TextView textView = (TextView) findViewById(R.id.text_view);
-        textView.setText("Medic Log - logs medical information");
+        textView.setText(R.string.description);
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -235,11 +234,11 @@ public class MainActivity extends Activity {
         TextView dateView = (TextView) findViewById(R.id.date_view);
         dateView.setText(strDate);
         TextView bpView = (TextView) findViewById(R.id.bp_view);
-        bpView.setText("Blood Pressure");
+        bpView.setText(R.string.blood_pressure);
         TextView tempView = (TextView) findViewById(R.id.temp_view);
-        tempView.setText("Temperature");
+        tempView.setText(R.string.temperature);
         TextView weightView = (TextView) findViewById(R.id.weight_view);
-        weightView.setText("Weight");
+        weightView.setText(R.string.weight);
     }
 
     public void onClickBpClear(View view) {
@@ -395,17 +394,18 @@ public class MainActivity extends Activity {
                     OutputStreamWriter(fOut);
             BufferedWriter fbw = new BufferedWriter(osw);
 
-            fbw.write("1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + commentStr);
+            String str = "1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + commentStr;
+            fbw.write(str);
             fbw.newLine();
             fbw.flush();
             fbw.close();
             // Also append it to the buffer
-            MedicLog.getInstance(getApplicationContext()).putHistoryBuffer("1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + commentStr);
+            MedicLog.getInstance(getApplicationContext()).putHistoryBuffer(str);
 
             MedicLog.getInstance(getApplicationContext()).incNumRecsAppendedToFile();
             MedicLog.getInstance(getApplicationContext()).incHistBuffReadIndex();
 
-            Toast.makeText(getBaseContext(), "File saved successfully!",
+            Toast.makeText(getBaseContext(), R.string.save_successful,
                     Toast.LENGTH_SHORT).show();
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -425,40 +425,35 @@ public class MainActivity extends Activity {
                 android.content.Intent.EXTRA_STREAM, Uri.parse("content://" + LocalFileProvider.AUTHORITY + "/"
                         + sharedPref.getString("fileName", "mediclog.txt")));
 
-        this.startActivity(Intent.createChooser(emailIntent, "Sending email..."));
+        this.startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
     }
 
     public void onClickDelete(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Delete file");
-        alert.setMessage("Are you sure you want to delete?");
-        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
-                File dir = getFilesDir();
-                File file = new File(dir, sharedPref.getString("fileName", "mediclog.txt"));
-                Button deleteBtn = (Button) findViewById(R.id.btnDelete);
-                deleteBtn.setVisibility(View.GONE);
-                Button sendBtn = (Button) findViewById(R.id.btnSend);
-                sendBtn.setVisibility(View.GONE);
-                boolean deleted = file.delete();
-                MedicLog.getInstance(getApplicationContext()).clearNumRecsReadFromFile();
-                MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
-                MedicLog.getInstance(getApplicationContext()).clearHistBuffIndex();
-                MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
+        alert.setTitle(R.string.delete_file);
+        alert.setMessage(R.string.delete_message);
+        alert.setPositiveButton(R.string.yes, (dialog, which) -> {
+            SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+            File dir = getFilesDir();
+            File file = new File(dir, sharedPref.getString("fileName", "mediclog.txt"));
+            Button deleteBtn = (Button) findViewById(R.id.btnDelete);
+            deleteBtn.setVisibility(View.GONE);
+            Button sendBtn = (Button) findViewById(R.id.btnSend);
+            sendBtn.setVisibility(View.GONE);
+            boolean deleted = file.delete();
+            MedicLog.getInstance(getApplicationContext()).clearNumRecsReadFromFile();
+            MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
+            MedicLog.getInstance(getApplicationContext()).clearHistBuffIndex();
+            MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
 
-                if (BuildConfig.DEBUG) {
-                    Log.d("mediclog", "Log file deleted");
-                }
-                dialog.dismiss();
+            if (BuildConfig.DEBUG) {
+                Log.d("mediclog", "Log file deleted");
             }
+            dialog.dismiss();
         });
-        alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // close dialog
-                dialog.cancel();
-            }
+        alert.setNegativeButton(android.R.string.no, (dialog, which) -> {
+            // close dialog
+            dialog.cancel();
         });
         alert.show();
     }

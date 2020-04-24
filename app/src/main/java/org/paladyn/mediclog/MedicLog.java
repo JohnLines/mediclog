@@ -29,54 +29,52 @@ public class MedicLog {
 
     private static MedicLog instance;
     // we need to define the maximum length a line in the History Log can be
-    public final int maxLogLineLength = 120;
+    private final int maxLogLineLength = 120;
     //public final int maxHistBuffLen = sharedPref.getInt("historyLength", 31);
-    public final int maxHistBuffLen = 31;
+    private final int maxHistBuffLen = 31;
     public int histBuffLength = 0;  // the maximum length of the historyBuffer we have used
-    public int histBuffIndex = 0;  // the place in the historyBuffer we are using
-    public int histBuffReadIndex = 0;  // the place in the historyBuffer we are reading from
+    private int histBuffIndex = 0;  // the place in the historyBuffer we are using
+    private int histBuffReadIndex = 0;  // the place in the historyBuffer we are reading from
 
     // want to make maxHistBuffLen dynamic, but for now allocate statically
-    public int histBuffFirstReadIndex = 0;  // the first place in the history buffer which was read
-    public int histBuffMaxReadIndex = 0;  // the maximum number of history buffer records to read
+    private int histBuffFirstReadIndex = 0;  // the first place in the history buffer which was read
+    private int histBuffMaxReadIndex = 0;  // the maximum number of history buffer records to read
     // 31 = maxHistBuffLen, 120 = maxLogLineLength
-    public char[][] historyBuffer = new char[maxHistBuffLen][maxLogLineLength];
-    public int numRecsReadFromFile = 0;
-    public int numRecsAppendedToFile = 0;
-    private Context context;
+    private char[][] historyBuffer = new char[maxHistBuffLen][maxLogLineLength];
+    private int numRecsReadFromFile = 0;
+    private int numRecsAppendedToFile = 0;
 
     private MedicLog(Context context) {
-        this.context = context;
     }
 
-    public static MedicLog getInstance(Context context) {
+    static MedicLog getInstance(Context context) {
         if (instance == null) {
             instance = new MedicLog(context.getApplicationContext());
         }
         return instance;
     }
 
-    public void incNumRecsReadFromFile() {
+    void incNumRecsReadFromFile() {
         numRecsReadFromFile++;
     }
 
-    public void incNumRecsAppendedToFile() {
+    void incNumRecsAppendedToFile() {
         numRecsAppendedToFile++;
     }
 
-    public void clearNumRecsReadFromFile() {
+    void clearNumRecsReadFromFile() {
         numRecsReadFromFile = 0;
     }
 
-    public void clearNumRecsAppendedToFile() {
+    void clearNumRecsAppendedToFile() {
         numRecsAppendedToFile = 0;
     }
 
-    public int getNumRecsReadFromFile() {
+    int getNumRecsReadFromFile() {
         return numRecsReadFromFile;
     }
 
-    public int getNumRecsAppendedToFile() {
+    int getNumRecsAppendedToFile() {
         return numRecsAppendedToFile;
     }
 
@@ -84,7 +82,7 @@ public class MedicLog {
         return histBuffIndex;
     }
 
-    public void incHistBuffIndex() {
+    private void incHistBuffIndex() {
         // wrap the history buffer index round in this routine.
         //Log.d("mediclog", "incHistBuffIndex -" + histBuffIndex);
         histBuffIndex++;
@@ -93,11 +91,11 @@ public class MedicLog {
         }
     }
 
-    public void clearHistBuffIndex() {
+    void clearHistBuffIndex() {
         histBuffIndex = 0;
     }
 
-    public void incHistBuffReadIndex() {
+    void incHistBuffReadIndex() {
         // wrap the history buffer read index round in this routine. Note that we leave the Read Index at 0 until histBuffIndex has reached
         //maxHistBuffLen
         if (histBuffIndex < maxHistBuffLen) {
@@ -111,7 +109,7 @@ public class MedicLog {
         }
     }
 
-    public void resetHistBuffReadIndex() {
+    void resetHistBuffReadIndex() {
         // set the histBuffReadIndex back to zero, if the History Buffer is not full - i.e. numRecsReadFromFile +
         //if (histBuffIndex < maxHistBuffLen) {
         if ((numRecsReadFromFile + numRecsAppendedToFile - 1) < maxHistBuffLen) {
@@ -127,7 +125,7 @@ public class MedicLog {
         }
     }
 
-    public void putHistoryBuffer(String line) {
+    void putHistoryBuffer(String line) {
         // Put a string into the History Buffer at the current index, and move the index on
         //Log.d("mediclog", "putHistoryBuffer *" + line + "*");
         // Fill the historyBuffer line with zeros.
@@ -138,7 +136,7 @@ public class MedicLog {
         incHistBuffIndex();
     }
 
-    public String getHistoryBufferFirstLine() {
+    String getHistoryBufferFirstLine() {
         // return the first line from the HistoryBuffer,
 
         histBuffMaxReadIndex = numRecsReadFromFile + numRecsAppendedToFile - 1;
@@ -172,7 +170,7 @@ public class MedicLog {
         return line;
     }
 
-    public String getHistoryBufferNextLine() {
+    String getHistoryBufferNextLine() {
         // return the next line from the HistoryBuffer,
         char[] histBuffLine = historyBuffer[histBuffReadIndex];
 

@@ -45,25 +45,25 @@ public class History extends Activity {
 
                 String[] values = line.split(",");
                 if (values.length == 1) {
-                    sb.append("Something has gone wrong - line is " + line);
+                    sb.append("Something has gone wrong - line is ").append(line);
                     historyTextView.setText(sb);
                     // Log.d("mediclog", "History - something wrong *" + line + "*");
                     return;
                 }
                 if (values.length > 0) {
-                    sb.append(values[1] + "-");
+                    sb.append(values[1]).append("-");
                 }
                 if (values.length > 4) {
-                    sb.append("(" + values[2] + "," + values[3] + "," + values[4] + ") ");
+                    sb.append("(").append(values[2]).append(",").append(values[3]).append(",").append(values[4]).append(") ");
                 }
                 if (values.length > 5) {
-                    sb.append(values[5] + " ");
+                    sb.append(values[5]).append(" ");
                 }
                 if (values.length > 6) {
                     sb.append(values[6]);
                 }
                 if (values.length > 7 && values[7].length() > 0) {
-                    sb.append("\n" + values[7]);
+                    sb.append("\n").append(values[7]);
                 }
 
                 sb.append("\n");
@@ -79,7 +79,4 @@ public class History extends Activity {
         // Log.d("mediclog", "History - sb cleared");
         MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
     }
-
-
 }
-

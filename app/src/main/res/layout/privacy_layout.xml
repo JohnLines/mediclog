@@ -21,25 +21,28 @@
         </RelativeLayout>
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnAccept"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
                 android:onClick="onClickAccept"
-                android:text="Accept" />
+                android:text="@string/accept" />
 
             <Button
                 android:id="@+id/btnAcceptKeep"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:onClick="onClickAcceptKeep"
-                android:text="Accept - Keep Displaying" />
+                android:text="@string/accept_keep_displaying" />
 
         </LinearLayout>
 
