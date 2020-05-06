@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="mediclog.txt"
+        android:key="fileName"
+        android:summary="@string/file_name_desc"
+        android:title="@string/file_name" />
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:key="sendTo"
+        android:summary="@string/send_to_desc"
+        android:title="@string/send_to" />
+
+    <EditTextPreference
+        android:defaultValue="MedicLog records"
+        android:key="sendSubject"
+        android:summary="@string/send_subject_desc"
+        android:title="@string/send_subject" />
+
+    <EditTextPreference
+        android:defaultValue="40"
+        android:inputType="number"
+        android:key="historyLength"
+        android:summary="@string/history_length_desc"
+        android:title="@string/history_length"
+        android:visibility="gone" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="timeUTC"
+        android:summary="@string/time_in_utc_desc"
+        android:title="@string/time_in_utc" />
+
+    <PreferenceCategory android:title="@string/pref_privacy_group">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="displayPrivacy"
+            android:summary="@string/privacy_policy_startup_desc"
+            android:title="@string/privacy_policy_startup" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="displayPrivacyKeep"
+            android:summary="@string/privacy_policy_each_startup_desc"
+            android:title="@string/privacy_policy_each_startup" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

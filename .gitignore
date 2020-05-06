@@ -16,9 +16,6 @@ out/
 # Gradle files
 .gradle/
 build/
-gradlew
-gradlew.bat
-gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -37,13 +34,11 @@ captures/
 
 # Intellij
 *.iml
-.idea/workspace.xml
+.idea/
 
 # Keystore files
 *.jks
 
-
 # local ignore files
 temp.txt
 ic_launcher.zip
-

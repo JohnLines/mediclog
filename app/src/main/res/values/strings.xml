@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MedicLog</string>
+    <string name="about">About</string>
+    <string name="preferences">Preferences</string>
+    <string name="history">History</string>
+    <string name="privacy">Privacy</string>
+    <string name="about_text">
+      <![CDATA[
+      Author: John Lines<br/><br/>MedicLog logs medical information with a focus
+      on simplicity and privacy. It is licenced under GPLv3 or later.]]>
+	  </string>
+    <string name="records_read">Records Read </string>
+    <string name="records_appended">Records Appended </string>
+    <string name="privacy_policy">
+	    <![CDATA[
+	    <h1>Privacy Policy</h1>
+	    Mediclog stores personal information, which you have entered, or possibly
+	    collected via another app.
+	    This data is stored within the private storage used by the MedicLog app,
+	    until you decide to send it via some other app to some destination of your
+	    choice.
+	    <h2>What type of information is collected?</h2>
+	    The app collects the information you enter, plus the date and time, and
+	    this is stored in the format described in <a href="https://github.com/JohnLines/mediclog/wiki/Data-format">
+		    Data Format</a> on the documentation
+	    for the app.
+
+	    <h2>Who has access to your information?</h2>
+	    Nobody has access to your information, unless you send it to them
+	    by means of the <b>Send</b> button.
+	    ]]>
+    </string>
+    <string name="pref_privacy_group">Privacy Display Settings</string>
+    <string name="no_history">No history to display</string>
+    <string name="description">MedicLog - logs medical information</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="temperature">Temperature</string>
+    <string name="weight">Weight</string>
+    <string name="save_successful">File saved successfully!</string>
+    <string name="delete_file">Delete file</string>
+    <string name="yes">Yes</string>
+    <string name="delete_message">Are you sure you want to delete?</string>
+    <string name="send_email">Sending email…</string>
+    <string name="file_doesnt_exist">File does not exist</string>
+    <string name="save">Save</string>
+    <string name="send">Send</string>
+    <string name="delete">Delete</string>
+    <string name="accept">Accept</string>
+    <string name="accept_keep_displaying">Accept (keep displaying)</string>
+    <string name="file_name">File name</string>
+    <string name="file_name_desc">The filename to store the MedicLog information</string>
+    <string name="send_to">Send To</string>
+    <string name="send_to_desc">The default recipient to use in the Send function</string>
+    <string name="send_subject">Send Subject</string>
+    <string name="send_subject_desc">Subject to use in the Send function</string>
+    <string name="history_length">History Length</string>
+    <string name="history_length_desc">Maximum number of records to go back in the history</string>
+    <string name="time_in_utc">Time in UTC</string>
+    <string name="time_in_utc_desc">If selected the recorded times will be in UTC, otherwise in local time</string>
+    <string name="privacy_policy_startup">Display privacy policy on first startup</string>
+    <string name="privacy_policy_startup_desc">Display the privacy policy for MedicLog on startup</string>
+    <string name="privacy_policy_each_startup">Display privacy policy on each startup</string>
+    <string name="privacy_policy_each_startup_desc">Display the privacy policy for MedicLog on each startup</string>
+</resources>
