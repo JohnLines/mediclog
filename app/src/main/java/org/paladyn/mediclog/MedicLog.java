@@ -18,6 +18,7 @@
 package org.paladyn.mediclog;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import java.util.Arrays;
 
@@ -43,6 +44,13 @@ public class MedicLog {
     private char[][] historyBuffer = new char[maxHistBuffLen][maxLogLineLength];
     private int numRecsReadFromFile = 0;
     private int numRecsAppendedToFile = 0;
+    // saveNeeded is initially false, change to true as soon as a value is changed.
+    private boolean saveIsNeeded = false;
+    // Need to keep a copy of the Save button original text colour so we can restore it
+    private boolean saveTextOriginalColourKnown = false;
+    private int saveTextOrignalColour;
+
+
 
     private MedicLog(Context context) {
     }
@@ -77,6 +85,17 @@ public class MedicLog {
     int getNumRecsAppendedToFile() {
         return numRecsAppendedToFile;
     }
+
+    void saveNeeded () {
+        saveIsNeeded = true;
+    }
+    void saveUnneeded ()  {
+        saveIsNeeded = false;
+    }
+    boolean isSaveTextOriginalColourKnown () { return saveTextOriginalColourKnown ; }
+    void setSaveTextOriginalColourKnown()  { saveTextOriginalColourKnown = true; }
+    void setSaveTextOrignalColour (int colour) { saveTextOrignalColour = colour ; }
+    int getSaveTextOriginalColour () { return saveTextOrignalColour;}
 
     public int getHistBuffIndex() {
         return histBuffIndex;

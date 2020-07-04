@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -203,6 +204,29 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void setSaveNeeded () {
+        MedicLog.getInstance(getApplicationContext()).saveNeeded();
+        Button saveBtn = (Button) findViewById(R.id.btnSave);
+        if ( !MedicLog.getInstance(getApplicationContext()).isSaveTextOriginalColourKnown() ) {
+            MedicLog.getInstance(getApplicationContext()).setSaveTextOrignalColour(saveBtn.getCurrentTextColor());
+            MedicLog.getInstance(getApplicationContext()).setSaveTextOriginalColourKnown();
+        }
+        saveBtn.setTextColor(Color.RED);
+
+    }
+
+    private void unsetSaveNeeded () {
+        MedicLog.getInstance(getApplicationContext()).saveUnneeded();
+        Button saveBtn = (Button) findViewById(R.id.btnSave);
+        // I want primary_text_light- deprecated in API level 28, but it is 0x01060003
+       // saveBtn.setTextColor(Color.parseColor("#01060003"));
+        if ( MedicLog.getInstance(getApplicationContext()).isSaveTextOriginalColourKnown() ) {
+            saveBtn.setTextColor(MedicLog.getInstance(getApplicationContext()).getSaveTextOriginalColour()) ;
+        } else {
+            saveBtn.setTextColor(Color.LTGRAY);
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -248,6 +272,7 @@ public class MainActivity extends Activity {
         diastolicText.setText("");
         EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
         heartrateText.setText("");
+        setSaveNeeded ();
     }
 
     public void onClickSystolicMinus(View view) {
@@ -258,6 +283,7 @@ public class MainActivity extends Activity {
         systolic = systolic - 1;
         systolicStr = String.format("%d", systolic);
         systolicText.setText(systolicStr);
+        setSaveNeeded ();
     }
 
     public void onClickSystolicPlus(View view) {
@@ -267,6 +293,7 @@ public class MainActivity extends Activity {
         systolic = systolic + 1;
         systolicStr = String.format("%d", systolic);
         systolicText.setText(systolicStr);
+        setSaveNeeded ();
     }
 
     public void onClickDiastolicMinus(View view) {
@@ -276,6 +303,7 @@ public class MainActivity extends Activity {
         diastolic = diastolic - 1;
         diastolicStr = String.format("%d", diastolic);
         diastolicText.setText(diastolicStr);
+        setSaveNeeded ();
     }
 
     public void onClickDiastolicPlus(View view) {
@@ -285,6 +313,7 @@ public class MainActivity extends Activity {
         diastolic = diastolic + 1;
         diastolicStr = String.format("%d", diastolic);
         diastolicText.setText(diastolicStr);
+        setSaveNeeded ();
     }
 
     public void onClickHrateMinus(View view) {
@@ -294,6 +323,7 @@ public class MainActivity extends Activity {
         heartrate = heartrate - 1;
         heartrateStr = String.format("%d", heartrate);
         heartrateText.setText(heartrateStr);
+        setSaveNeeded ();
     }
 
     public void onClickHratePlus(View view) {
@@ -303,11 +333,13 @@ public class MainActivity extends Activity {
         heartrate = heartrate + 1;
         heartrateStr = String.format("%d", heartrate);
         heartrateText.setText(heartrateStr);
+        setSaveNeeded ();
     }
 
     public void onClickTempClear(View view) {
         EditText tempText = (EditText) findViewById(R.id.tempText);
         tempText.setText("");
+        setSaveNeeded ();
     }
 
     public void onClickTempMinus(View view) {
@@ -319,6 +351,7 @@ public class MainActivity extends Activity {
         tempStr = String.format("%d", temp);
         tempStr2 = new StringBuilder(tempStr).insert(tempStr.length() - 1, ".").toString();
         tempText.setText(tempStr2);
+        setSaveNeeded ();
     }
 
     public void onClickTempPlus(View view) {
@@ -330,11 +363,13 @@ public class MainActivity extends Activity {
         tempStr = String.format("%d", temp);
         tempStr2 = new StringBuilder(tempStr).insert(tempStr.length() - 1, ".").toString();
         tempText.setText(tempStr2);
+        setSaveNeeded ();
     }
 
     public void onClickWeightClear(View view) {
         EditText weightText = (EditText) findViewById(R.id.weightText);
         weightText.setText("");
+        setSaveNeeded ();
     }
 
     public void onClickWeightMinus(View view) {
@@ -346,6 +381,7 @@ public class MainActivity extends Activity {
         weightStr = String.format("%d", weight);
         weightStr2 = new StringBuilder(weightStr).insert(weightStr.length() - 1, ".").toString();
         weightText.setText(weightStr2);
+        setSaveNeeded ();
     }
 
     public void onClickWeightPlus(View view) {
@@ -357,11 +393,15 @@ public class MainActivity extends Activity {
         weightStr = String.format("%d", weight);
         weightStr2 = new StringBuilder(weightStr).insert(weightStr.length() - 1, ".").toString();
         weightText.setText(weightStr2);
+        setSaveNeeded ();
     }
 
     public void onClickCommentClear(View view) {
         EditText commentText = (EditText) findViewById(R.id.commentText);
         commentText.setText("");
+        setSaveNeeded ();
+
+
     }
 
     public void onClickSave(View view) {
@@ -410,7 +450,9 @@ public class MainActivity extends Activity {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        unsetSaveNeeded();
     }
+
 
     public void onClickSend(View view) {
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
