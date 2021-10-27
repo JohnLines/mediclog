@@ -32,10 +32,11 @@
 
             <ImageButton
                 android:id="@+id/bpClear"
-                android:layout_width="45dp"
+                android:layout_width="14dp"
                 android:layout_height="45dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
+                android:contentDescription="Clear Blood Pressure fields"
                 android:onClick="onClickBpClear"
                 android:scaleType="fitCenter"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
@@ -49,7 +50,7 @@
 
             <Button
                 android:id="@+id/systolicMinus"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickSystolicMinus"
@@ -59,14 +60,15 @@
                 android:id="@+id/systolicText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
+                android:ems="3"
                 android:inputType="number"
                 android:maxLength="3"
+                android:minHeight="48dp"
                 android:text="130" />
 
             <Button
                 android:id="@+id/systolicPlus"
-                android:layout_width="wrap_content"
+                android:layout_width="63dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickSystolicPlus"
@@ -81,7 +83,7 @@
 
             <Button
                 android:id="@+id/diastolicMinus"
-                android:layout_width="wrap_content"
+                android:layout_width="49dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickDiastolicMinus"
@@ -91,14 +93,15 @@
                 android:id="@+id/diastolicText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
+                android:ems="3"
                 android:inputType="number"
                 android:maxLength="3"
+                android:minHeight="48dp"
                 android:text="80" />
 
             <Button
                 android:id="@+id/diastolicPlus"
-                android:layout_width="wrap_content"
+                android:layout_width="61dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickDiastolicPlus"
@@ -113,7 +116,7 @@
 
             <Button
                 android:id="@+id/hrateMinus"
-                android:layout_width="wrap_content"
+                android:layout_width="51dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickHrateMinus"
@@ -123,14 +126,15 @@
                 android:id="@+id/heartrateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="4"
+                android:ems="3"
                 android:inputType="number"
                 android:maxLength="3"
+                android:minHeight="48dp"
                 android:text="60" />
 
             <Button
                 android:id="@+id/hratePlus"
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickHratePlus"
@@ -152,10 +156,11 @@
 
             <ImageButton
                 android:id="@+id/tempClear"
-                android:layout_width="45dp"
+                android:layout_width="14dp"
                 android:layout_height="45dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
+                android:contentDescription="Clear Temperature Field"
                 android:onClick="onClickTempClear"
                 android:scaleType="fitCenter"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
@@ -169,7 +174,7 @@
 
             <Button
                 android:id="@+id/tempMinus"
-                android:layout_width="wrap_content"
+                android:layout_width="53dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickTempMinus"
@@ -179,14 +184,15 @@
                 android:id="@+id/tempText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
+                android:ems="3"
                 android:inputType="numberDecimal"
-                android:maxLength="5"
+                android:maxLength="4"
+                android:minHeight="48dp"
                 android:text="36.0" />
 
             <Button
                 android:id="@+id/tempPlus"
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickTempPlus"
@@ -212,6 +218,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
+                android:contentDescription="Clear Weight field"
                 android:onClick="onClickWeightClear"
                 android:scaleType="fitCenter"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
@@ -225,7 +232,7 @@
 
             <Button
                 android:id="@+id/weightMinus"
-                android:layout_width="wrap_content"
+                android:layout_width="56dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickWeightMinus"
@@ -235,14 +242,15 @@
                 android:id="@+id/weightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
+                android:ems="3"
                 android:inputType="numberDecimal"
-                android:maxLength="6"
+                android:maxLength="5"
+                android:minHeight="48dp"
                 android:text="75.0" />
 
             <Button
                 android:id="@+id/weightPlus"
-                android:layout_width="wrap_content"
+                android:layout_width="59dp"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickWeightPlus"
@@ -266,10 +274,11 @@
 
             <ImageButton
                 android:id="@+id/commentClear"
-                android:layout_width="45dp"
+                android:layout_width="16dp"
                 android:layout_height="45dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
+                android:contentDescription="Clear Comment field"
                 android:onClick="onClickCommentClear"
                 android:scaleType="fitCenter"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
@@ -285,7 +294,7 @@
             <Button
                 android:id="@+id/btnSave"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:ems="6"
                 android:onClick="onClickSave"
