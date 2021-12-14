@@ -8,8 +8,8 @@ android {
         applicationId "org.paladyn.mediclog"
         minSdkVersion 14
         targetSdkVersion 30
-        versionName "0.2.9"
-        versionCode 13
+        versionName "0.2.10"
+        versionCode 14
     }
 
     buildTypes {
