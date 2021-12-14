@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+
+-<resources>
+
+
+<string name="app_name">MedicLog</string>
+
+
+<string name="about">Acerca de</string>
+
+
+<string name="preferences">Preferencias</string>
+
+
+<string name="history">Historia</string>
+
+
+<string name="privacy">Privacidad</string>
+
+
+
+
+-<string name="about_text">
+
+
+-<![CDATA[
+      Author: John Lines<br/><br/>MedicLog registra información médica con un enfoque
+       sobre la sencillez y la privacidad. Tiene licencia GPLv3 o posterior.]]>
+</string>
+
+
+<string name="records_read">Lectura de registros</string>
+
+
+<string name="records_appended">Registros adjuntos </string>
+
+
+
+
+-<string name="privacy_policy">
+
+
+-<![CDATA[
+            <h1>Política de privacidad</h1>
+            Mediclog almacena información personal, que ha ingresado, o posiblemente
+recopilados a través de otra aplicación.
+Estos datos se almacenan en el almacenamiento privado utilizado por la aplicación MedicLog,
+hasta que decida enviarlo a través de alguna otra aplicación a algún destino de su
+elección.
+
+
+            <h2>¿Qué tipo de información se recopila?</h2>
+            La aplicación recopila la información que ingresa, además de la fecha y hora, y
+esto se almacena en el formato descrito en
+ <a href="https://github.com/JohnLines/mediclog/wiki/Data-format">
+                    Formato de los Datos</a> en la documentación
+para la aplicación.
+
+
+
+
+            <h2>¿Quién tiene acceso a tu información?</h2>
+          Nadie tiene acceso a su información, a menos que usted se la envíe.
+por medio del boton
+ <b>Enviar</b>.
+            ]]>
+</string>
+
+
+<string name="pref_privacy_group">Configuración de pantalla de privacidad</string>
+
+
+<string name="no_history">Sin historial para mostrar</string>
+
+
+<string name="description">MedicLog - registra información médica</string>
+
+
+<string name="blood_pressure">Presión arterial</string>
+
+
+<string name="temperature">Temperatura</string>
+
+
+<string name="weight">Peso</string>
+
+
+<string name="save_successful">Archivo guardado exitosamente!</string>
+
+
+<string name="delete_file">Eliminar Archivo</string>
+
+
+<string name="yes">Si</string>
+
+
+<string name="delete_message">¿Estás segura de que quieres eliminar?</string>
+
+
+<string name="send_email">Enviando correo...</string>
+
+
+<string name="file_doesnt_exist">El Archivo no existe</string>
+
+
+<string name="save">Guardar</string>
+
+
+<string name="send">Enviar</string>
+
+
+<string name="delete">Eliminar</string>
+
+
+<string name="accept">Aceptar</string>
+
+
+<string name="accept_keep_displaying">Aceptar (continuar mostrando)</string>
+
+
+<string name="file_name">Nombre del Archivo</string>
+
+
+<string name="file_name_desc">El nombre del archivo para guardar la informacion de MedicLog i</string>
+
+
+<string name="send_to">Enviar a</string>
+
+
+<string name="send_to_desc">El destinatario predeterminado para usar en la función Enviar</string>
+
+
+<string name="send_subject">Enviar Asunto</string>
+
+
+<string name="send_subject_desc">Asunto para usar en la función enviar</string>
+
+
+<string name="history_length">Duración del historial</string>
+
+
+<string name="history_length_desc">Número máximo de registros para retroceder en el historial</string>
+
+
+<string name="time_in_utc">Tiempo en UTC</string>
+
+
+<string name="time_in_utc_desc">Si se selecciona, las horas registradas estarán en UTC, de lo contrario, en la hora local</string>
+
+
+<string name="privacy_policy_startup">Mostrar la política de privacidad en el primer inicio</string>
+
+
+<string name="privacy_policy_startup_desc">Mostrar la política de privacidad de MedicLog al inicio</string>
+
+
+<string name="privacy_policy_each_startup">Mostrar la política de privacidad en cada inicio</string>
+
+
+<string name="privacy_policy_each_startup_desc">Mostrar la política de privacidad de MedicLog en cada inicio</string>
+
+
+</resources>
