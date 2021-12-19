@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -33,7 +33,7 @@
             <ImageButton
                 android:id="@+id/bpClear"
                 android:layout_width="14dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:contentDescription="Clear Blood Pressure fields"
@@ -50,7 +50,7 @@
 
             <Button
                 android:id="@+id/systolicMinus"
-                android:layout_width="45dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickSystolicMinus"
@@ -68,7 +68,7 @@
 
             <Button
                 android:id="@+id/systolicPlus"
-                android:layout_width="63dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickSystolicPlus"
@@ -83,7 +83,7 @@
 
             <Button
                 android:id="@+id/diastolicMinus"
-                android:layout_width="49dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickDiastolicMinus"
@@ -101,7 +101,7 @@
 
             <Button
                 android:id="@+id/diastolicPlus"
-                android:layout_width="61dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickDiastolicPlus"
@@ -116,7 +116,7 @@
 
             <Button
                 android:id="@+id/hrateMinus"
-                android:layout_width="51dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickHrateMinus"
@@ -134,7 +134,7 @@
 
             <Button
                 android:id="@+id/hratePlus"
-                android:layout_width="62dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickHratePlus"
@@ -157,7 +157,7 @@
             <ImageButton
                 android:id="@+id/tempClear"
                 android:layout_width="14dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:contentDescription="Clear Temperature Field"
@@ -174,7 +174,7 @@
 
             <Button
                 android:id="@+id/tempMinus"
-                android:layout_width="53dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickTempMinus"
@@ -192,7 +192,7 @@
 
             <Button
                 android:id="@+id/tempPlus"
-                android:layout_width="62dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickTempPlus"
@@ -214,8 +214,8 @@
 
             <ImageButton
                 android:id="@+id/weightClear"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:contentDescription="Clear Weight field"
@@ -232,7 +232,7 @@
 
             <Button
                 android:id="@+id/weightMinus"
-                android:layout_width="56dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickWeightMinus"
@@ -250,7 +250,7 @@
 
             <Button
                 android:id="@+id/weightPlus"
-                android:layout_width="59dp"
+                android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
                 android:ems="2"
                 android:onClick="onClickWeightPlus"

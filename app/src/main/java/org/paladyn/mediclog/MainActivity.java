@@ -99,6 +99,13 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void makeSendDeleteVisible() {
+        Button deleteBtn = (Button) findViewById(R.id.btnDelete);
+        deleteBtn.setVisibility(View.VISIBLE);
+        Button sendBtn = (Button) findViewById(R.id.btnSend);
+        sendBtn.setVisibility(View.VISIBLE);
+    }
+
     private void createLog(File file) {
         try {
             FileOutputStream os = new FileOutputStream(file);
@@ -107,10 +114,15 @@ public class MainActivity extends Activity {
             fbw.newLine();
             fbw.flush();
             fbw.close();
+            makeSendDeleteVisible();
+ /*
             Button deleteBtn = (Button) findViewById(R.id.btnDelete);
+
             deleteBtn.setVisibility(View.VISIBLE);
             Button sendBtn = (Button) findViewById(R.id.btnSend);
             sendBtn.setVisibility(View.VISIBLE);
+
+  */
             if (BuildConfig.DEBUG) {
                 Log.d("mediclog", "Log file created " + file.getName());
             }
@@ -242,6 +254,8 @@ public class MainActivity extends Activity {
             } catch (DataFormatException dfe) {
                 dfe.printStackTrace();
             }
+        } else {
+            makeSendDeleteVisible();
         }
 
         TextView textView = (TextView) findViewById(R.id.text_view);
