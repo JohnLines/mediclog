@@ -61,4 +61,6 @@
     <string name="privacy_policy_startup_desc">Zeigen Sie die Datenschutzrichtlinie für MedicLog beim Start an</string>
     <string name="privacy_policy_each_startup">Datenschutzrichtlinie bei jedem Start anzeigen</string>
     <string name="privacy_policy_each_startup_desc">Zeigen Sie die Datenschutzrichtlinie für MedicLog bei jedem Start an</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>

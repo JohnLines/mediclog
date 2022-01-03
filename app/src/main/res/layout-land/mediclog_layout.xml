@@ -33,7 +33,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_weight="9" />
+                    android:layout_weight="9"
+                    android:text="@string/blood_pressure" />
 
                 <ImageButton
                     android:id="@+id/bpClear"
@@ -63,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickSystolicMinus"
-                        android:text="-" />
+                        android:text="@string/minus" />
 
                     <EditText
                         android:id="@+id/systolicText"
@@ -80,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickSystolicPlus"
-                        android:text="+" />
+                        android:text="@string/plus" />
 
                 </LinearLayout>
 
@@ -95,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickDiastolicMinus"
-                        android:text="-" />
+                        android:text="@string/minus" />
 
                     <EditText
                         android:id="@+id/diastolicText"
@@ -112,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickDiastolicPlus"
-                        android:text="+" />
+                        android:text="@string/plus" />
 
                 </LinearLayout>
 
@@ -127,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickHrateMinus"
-                        android:text="-" />
+                        android:text="@string/minus" />
 
                     <EditText
                         android:id="@+id/heartrateText"
@@ -144,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:ems="2"
                         android:onClick="onClickHratePlus"
-                        android:text="+" />
+                        android:text="@string/plus" />
 
                 </LinearLayout>
 
@@ -167,7 +168,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_weight="9" />
+                    android:layout_weight="9"
+                    android:text="@string/temperature" />
 
                 <ImageButton
                     android:id="@+id/tempClear"
@@ -192,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:ems="2"
                     android:onClick="onClickTempMinus"
-                    android:text="-" />
+                    android:text="@string/minus" />
 
                 <EditText
                     android:id="@+id/tempText"
@@ -209,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:ems="2"
                     android:onClick="onClickTempPlus"
-                    android:text="+" />
+                    android:text="@string/plus" />
 
             </LinearLayout>
 
@@ -223,7 +225,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_weight="9" />
+                    android:layout_weight="9"
+                    android:text="@string/weight" />
 
                 <ImageButton
                     android:id="@+id/weightClear"
@@ -248,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:ems="2"
                     android:onClick="onClickWeightMinus"
-                    android:text="-" />
+                    android:text="@string/minus" />
 
                 <EditText
                     android:id="@+id/weightText"
@@ -265,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:ems="2"
                     android:onClick="onClickWeightPlus"
-                    android:text="+" />
+                    android:text="@string/plus" />
 
             </LinearLayout>
 

@@ -159,6 +159,7 @@ por medio del boton
 
 
 <string name="privacy_policy_each_startup_desc">Mostrar la política de privacidad de MedicLog en cada inicio</string>
-
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 
 </resources>

@@ -19,242 +19,272 @@
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:id="@+id/bp_block"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bp_view"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="9" />
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/bpClear"
-                android:layout_width="14dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:contentDescription="Clear Blood Pressure fields"
-                android:onClick="onClickBpClear"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+                <TextView
+                    android:id="@+id/bp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="9"
+                    android:text="@string/blood_pressure" />
 
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/bpClear"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:contentDescription="Clear Blood Pressure fields"
+                    android:onClick="onClickBpClear"
+                    android:scaleType="fitCenter"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/systolicMinus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickSystolicMinus"
-                android:text="-" />
-
-            <EditText
-                android:id="@+id/systolicText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="3"
-                android:inputType="number"
-                android:maxLength="3"
-                android:minHeight="48dp"
-                android:text="130" />
-
-            <Button
-                android:id="@+id/systolicPlus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickSystolicPlus"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/diastolicMinus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickDiastolicMinus"
-                android:text="-" />
-
-            <EditText
-                android:id="@+id/diastolicText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="3"
-                android:inputType="number"
-                android:maxLength="3"
-                android:minHeight="48dp"
-                android:text="80" />
-
-            <Button
-                android:id="@+id/diastolicPlus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickDiastolicPlus"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/hrateMinus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickHrateMinus"
-                android:text="-" />
-
-            <EditText
-                android:id="@+id/heartrateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="3"
-                android:inputType="number"
-                android:maxLength="3"
-                android:minHeight="48dp"
-                android:text="60" />
-
-            <Button
-                android:id="@+id/hratePlus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickHratePlus"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/temp_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="9" />
-
-            <ImageButton
-                android:id="@+id/tempClear"
-                android:layout_width="14dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:contentDescription="Clear Temperature Field"
-                android:onClick="onClickTempClear"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/tempMinus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickTempMinus"
-                android:text="-" />
-
-            <EditText
-                android:id="@+id/tempText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="3"
-                android:inputType="numberDecimal"
-                android:maxLength="4"
-                android:minHeight="48dp"
-                android:text="36.0" />
-
-            <Button
-                android:id="@+id/tempPlus"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickTempPlus"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/weight_view"
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="9" />
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/weightClear"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:contentDescription="Clear Weight field"
-                android:onClick="onClickWeightClear"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+                <Button
+                    android:id="@+id/systolicMinus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickSystolicMinus"
+                    android:text="@string/minus" />
+
+                <EditText
+                    android:id="@+id/systolicText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:minHeight="48dp"
+                    android:text="130" />
+
+                <Button
+                    android:id="@+id/systolicPlus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickSystolicPlus"
+                    android:text="@string/plus" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/diastolicMinus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickDiastolicMinus"
+                    android:text="@string/minus" />
+
+                <EditText
+                    android:id="@+id/diastolicText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:minHeight="48dp"
+                    android:text="80" />
+
+                <Button
+                    android:id="@+id/diastolicPlus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickDiastolicPlus"
+                    android:text="@string/plus" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/hrateMinus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickHrateMinus"
+                    android:text="@string/minus" />
+
+                <EditText
+                    android:id="@+id/heartrateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:minHeight="48dp"
+                    android:text="60" />
+
+                <Button
+                    android:id="@+id/hratePlus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickHratePlus"
+                    android:text="@string/plus" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:id="@+id/temperature_block"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/weightMinus"
-                android:layout_width="@dimen/button_width"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickWeightMinus"
-                android:text="-" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/weightText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="3"
-                android:inputType="numberDecimal"
-                android:maxLength="5"
-                android:minHeight="48dp"
-                android:text="75.0" />
+                <TextView
+                    android:id="@+id/temp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="9"
+                    android:text="@string/temperature" />
 
-            <Button
-                android:id="@+id/weightPlus"
-                android:layout_width="@dimen/button_width"
+                <ImageButton
+                    android:id="@+id/tempClear"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:contentDescription="Clear Temperature Field"
+                    android:onClick="onClickTempClear"
+                    android:scaleType="fitCenter"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:ems="2"
-                android:onClick="onClickWeightPlus"
-                android:text="+" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/tempMinus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickTempMinus"
+                    android:text="@string/minus" />
+
+                <EditText
+                    android:id="@+id/tempText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    android:minHeight="48dp"
+                    android:text="36.0" />
+
+                <Button
+                    android:id="@+id/tempPlus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickTempPlus"
+                    android:text="@string/plus" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weight_block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/weight_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="9"
+                    android:text="@string/weight"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/weightClear"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:contentDescription="Clear Weight field"
+                    android:onClick="onClickWeightClear"
+                    android:scaleType="fitCenter"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/weightMinus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickWeightMinus"
+                    android:text="@string/minus" />
+
+                <EditText
+                    android:id="@+id/weightText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:minHeight="48dp"
+                    android:text="75.0" />
+
+                <Button
+                    android:id="@+id/weightPlus"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="wrap_content"
+                    android:ems="2"
+                    android:onClick="onClickWeightPlus"
+                    android:text="@string/plus" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -275,7 +305,7 @@
             <ImageButton
                 android:id="@+id/commentClear"
                 android:layout_width="16dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:contentDescription="Clear Comment field"

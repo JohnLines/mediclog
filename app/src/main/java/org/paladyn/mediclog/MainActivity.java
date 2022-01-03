@@ -271,12 +271,7 @@ public class MainActivity extends Activity {
         String strDate = mdformat.format(calendar.getTime());
         TextView dateView = (TextView) findViewById(R.id.date_view);
         dateView.setText(strDate);
-        TextView bpView = (TextView) findViewById(R.id.bp_view);
-        bpView.setText(R.string.blood_pressure);
-        TextView tempView = (TextView) findViewById(R.id.temp_view);
-        tempView.setText(R.string.temperature);
-        TextView weightView = (TextView) findViewById(R.id.weight_view);
-        weightView.setText(R.string.weight);
+
     }
 
     public void onClickBpClear(View view) {
