@@ -25,6 +25,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import java.io.File;
+
 public class About extends Activity {
 
     @Override
@@ -43,12 +45,34 @@ public class About extends Activity {
 
         TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
 
+        String fileName = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE).getString("fileName", "mediclog.txt");
+        File file = new File(getFilesDir(), fileName);
+        long fileSizeInBytes = file.length();
+        String fileSizeString = "";
+
+        java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
+        float sizeKb = 1024.0f;
+        float sizeMb = sizeKb * sizeKb;
+        float sizeGb = sizeMb * sizeKb;
+        float sizeTerra = sizeGb * sizeKb;
+        if(fileSizeInBytes < sizeMb)
+            fileSizeString =  df.format(fileSizeInBytes / sizeKb)+ " Kb";
+        else if(fileSizeInBytes < sizeGb)
+            fileSizeString = df.format(fileSizeInBytes / sizeMb) + " Mb";
+        else if(fileSizeInBytes < sizeTerra)
+            fileSizeString =  df.format(fileSizeInBytes / sizeGb) + " Gb";
+
+
         Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
                 + getString(R.string.about_text) + "<p>"
                 + getString(R.string.records_read) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() + "<br>"
-                + getString(R.string.records_appended) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile()
+                + getString(R.string.records_appended) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile() + "<br>"
+                + "File Name: " + fileName + "<br>"
+                + "File Size (bytes): " + String.format("%,d bytes", fileSizeInBytes) + "(" + fileSizeString + ")" + "<br>"
         );
-
+        
         aboutTextView.setText(aboutText);
     }
+
+
 }
