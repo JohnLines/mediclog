@@ -19,6 +19,7 @@ package org.paladyn.mediclog;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -76,6 +77,13 @@ public class MedicLog {
 
     void clearNumRecsAppendedToFile() {
         numRecsAppendedToFile = 0;
+    }
+
+    void setNumRecsReadFromFile( int i) {
+        if (BuildConfig.DEBUG) {
+            Log.d("mediclog", "setNumRecsReadFromFile " + i);
+        }
+        numRecsReadFromFile = i;
     }
 
     int getNumRecsReadFromFile() {
@@ -166,6 +174,8 @@ public class MedicLog {
 
         if (histBuffMaxReadIndex > maxHistBuffLen) {
             histBuffReadIndex = histBuffIndex;
+            // Sanity check
+            if  (histBuffReadIndex > maxHistBuffLen) { histBuffReadIndex = 0 ; }
             //Log.d("mediclog", "Reset histBuffReadIndex to HistBuffIndex " + histBuffReadIndex);
         }
         histBuffFirstReadIndex = histBuffReadIndex;

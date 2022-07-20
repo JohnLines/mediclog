@@ -64,4 +64,5 @@
     <string name="privacy_policy_each_startup_desc">Display the privacy policy for MedicLog on each startup</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
+    <string name="Truncate">"Truncate"</string>
 </resources>

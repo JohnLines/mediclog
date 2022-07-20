@@ -483,7 +483,7 @@ public class MainActivity extends Activity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.delete_file);
         alert.setMessage(R.string.delete_message);
-        alert.setPositiveButton(R.string.yes, (dialog, which) -> {
+        alert.setPositiveButton(android.R.string.yes, (dialog, which) -> {
             SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
             File dir = getFilesDir();
             File file = new File(dir, sharedPref.getString("fileName", "mediclog.txt"));
@@ -502,6 +502,55 @@ public class MainActivity extends Activity {
             }
             dialog.dismiss();
         });
+        alert.setNeutralButton( R.string.Truncate, (dialog, which) -> {
+                    SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+                    File dir = getFilesDir();
+                    File file = new File(dir, sharedPref.getString("fileName", "mediclog.txt"));
+                    // delete existing file
+                    boolean deleted = file.delete();
+                    // Create file and Write a header,
+                    createLog(file);
+            if (MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() +
+                    MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile() == 0) {
+                // Do not do anything - there is nothing in history to read
+            } else {
+                try {
+                    if (BuildConfig.DEBUG) {
+                        Log.d("mediclog", "About to start truncate");
+                    }
+                    Integer numRead = 0;
+                    String line = MedicLog.getInstance(getApplicationContext()).getHistoryBufferFirstLine();
+                    // Log.d("mediclog", "History - first line *" + line + "*");
+                    numRead = numRead + 1;
+                    if (BuildConfig.DEBUG) {
+                        Log.d("mediclog", "Truncate - r 1st line *"+ line + "*");
+                    }
+                    FileOutputStream fOut = new FileOutputStream(file, true);
+                    OutputStreamWriter osw = new
+                            OutputStreamWriter(fOut);
+                    BufferedWriter fbw = new BufferedWriter(osw);
+                    while (line != null) {
+                        fbw.write(line);
+                        fbw.newLine();
+                        line = MedicLog.getInstance(getApplicationContext()).getHistoryBufferNextLine();
+                        if (BuildConfig.DEBUG) {
+                            Log.d("mediclog", "Truncate - r line *"+ line + "*");
+                        }
+                        if (line != null ) {numRead = numRead + 1; }
+                    }
+                    fbw.flush();
+                    fbw.close();
+
+                    MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
+                    MedicLog.getInstance(getApplicationContext()).clearNumRecsAppendedToFile();
+                    MedicLog.getInstance(getApplicationContext()).setNumRecsReadFromFile( numRead );
+
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+                    dialog.dismiss();
+                });
         alert.setNegativeButton(android.R.string.no, (dialog, which) -> {
             // close dialog
             dialog.cancel();

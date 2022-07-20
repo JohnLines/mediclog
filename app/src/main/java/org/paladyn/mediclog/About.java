@@ -70,7 +70,7 @@ public class About extends Activity {
                 + "File Name: " + fileName + "<br>"
                 + "File Size (bytes): " + String.format("%,d bytes", fileSizeInBytes) + "(" + fileSizeString + ")" + "<br>"
         );
-        
+
         aboutTextView.setText(aboutText);
     }
 
