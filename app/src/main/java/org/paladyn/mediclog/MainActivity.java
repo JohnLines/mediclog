@@ -530,6 +530,8 @@ public class MainActivity extends Activity {
                             OutputStreamWriter(fOut);
                     BufferedWriter fbw = new BufferedWriter(osw);
                     while (line != null) {
+                        // remove null characters from line
+                        line.replace("\u0000", "");
                         fbw.write(line);
                         fbw.newLine();
                         line = MedicLog.getInstance(getApplicationContext()).getHistoryBufferNextLine();

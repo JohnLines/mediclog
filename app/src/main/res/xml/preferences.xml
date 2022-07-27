@@ -28,6 +28,19 @@
         android:visibility="gone" />
 
     <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="historyShowEmptyComments"
+        android:summary="If enabled then empty comment lines will be displayed in the history"
+        android:title="History Show Empty Comments" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="historyShowTime"
+        android:summary="If enabled then record times will be displayed in the history"
+        android:title="History Show Time" />
+
+
+    <CheckBoxPreference
         android:defaultValue="true"
         android:key="timeUTC"
         android:summary="@string/time_in_utc_desc"

@@ -19,9 +19,16 @@
 package org.paladyn.mediclog;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.util.Log;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+import java.util.Calendar;
 
 public class History extends Activity {
 
@@ -29,6 +36,14 @@ public class History extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_layout);
+
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (sharedPref.getBoolean("timeUTC", true)) {
+            mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        } else {
+            mdformat.setTimeZone(TimeZone.getDefault());
+        }
 
         TextView historyTextView = (TextView) findViewById(R.id.history_text_view);
 
@@ -51,7 +66,33 @@ public class History extends Activity {
                     return;
                 }
                 if (values.length > 0) {
-                    sb.append(values[1]).append("-");
+                    String dateTime = values[1];
+                    try {
+                        java.util.Date rdate = mdformat.parse(dateTime);
+
+                    java.util.Calendar rcal = java.util.Calendar.getInstance();
+                    rcal.setTime(rdate);
+                        int year = rcal.get(Calendar.YEAR);
+                        int month = rcal.get(Calendar.MONTH);
+                        int day = rcal.get(Calendar.DAY_OF_MONTH);
+                        int hour = rcal.get(Calendar.HOUR_OF_DAY);
+                        int minute = rcal.get(Calendar.MINUTE);
+                    if (BuildConfig.DEBUG) {
+                       Log.d("mediclog", "DateTime  " +
+                            dateTime + " Y " + year + " m " + (month+1)+ " d "+ day + " h " + hour
+                            + " m "+ minute);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+// for now just split
+                    String[]  thisDateTime = dateTime.split(" ", 2);
+                    sb.append(thisDateTime[0]);
+                    if (sharedPref.getBoolean("historyShowTime", false) ) {
+                        sb.append(' '); sb.append(thisDateTime[1]);
+                    }
+
+                    sb.append("-");
                 }
                 if (values.length > 4) {
                     sb.append("(").append(values[2]).append(",").append(values[3]).append(",").append(values[4]).append(") ");
@@ -63,7 +104,19 @@ public class History extends Activity {
                     sb.append(values[6]);
                 }
                 if (values.length > 7 && values[7].length() > 0) {
-                    sb.append("\n").append(values[7]);
+                    String comment = values[7].replace("\u0000", "");
+                    // if (BuildConfig.DEBUG) {
+                    //   Log.d("mediclog", "comment  " + comment.length()
+                    //        + "*" + comment + "*");
+                    // }
+                    // hide emtpy comments of those which start with : unless historyShowEmptyComments is true
+                    if ((comment.length() > 0 && comment.charAt(0) != ':' )  || sharedPref.getBoolean("historyShowEmptyComments", false) ) {
+                        sb.append("\n").append(comment);
+                    }
+                } else {
+                    if (BuildConfig.DEBUG) {
+                        Log.d("mediclog", "comment - no comment ");
+                    }
                 }
 
                 sb.append("\n");
