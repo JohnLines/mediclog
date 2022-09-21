@@ -65,4 +65,8 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="Truncate">"Truncate"</string>
+    <string name="history_disp_prefs">History Display Preferences</string>
+    <string name="oxygen_saturation">Oxygen Saturation</string>
+    <string name="rest">Rest</string>
+    <string name="after_activity">After Activity</string>
 </resources>

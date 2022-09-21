@@ -68,7 +68,8 @@ public class About extends Activity {
                 + getString(R.string.records_read) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() + "<br>"
                 + getString(R.string.records_appended) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile() + "<br>"
                 + "File Name: " + fileName + "<br>"
-                + "File Size (bytes): " + String.format("%,d bytes", fileSizeInBytes) + "(" + fileSizeString + ")" + "<br>"
+                + "File Size (bytes): " + String.format("%,d bytes", fileSizeInBytes) + "(" + fileSizeString + ")" + "<br><br>"
+                + "For documentation see <a href=\"https://johnlines.github.io/mediclog/\">https://johnlines.github.io/mediclog/</a>"
         );
 
         aboutTextView.setText(aboutText);

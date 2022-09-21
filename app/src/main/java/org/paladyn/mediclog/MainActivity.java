@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
     final int defaultHeartrate = 60;
     final int defaultTemperature = 363;
     final int defaultWeight = 750;
+    final int defaultO2 = 98;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -272,6 +273,13 @@ public class MainActivity extends Activity {
         TextView dateView = (TextView) findViewById(R.id.date_view);
         dateView.setText(strDate);
 
+        if (sharedPref.getBoolean("recordPulseOximeter", false)) {
+            View o2Block = findViewById(R.id.oximiter_block) ;
+            o2Block.setVisibility(View.VISIBLE);
+        } else {
+            View o2Block = findViewById(R.id.oximiter_block) ;
+            o2Block.setVisibility(View.GONE);
+        }
     }
 
     public void onClickBpClear(View view) {
@@ -412,6 +420,59 @@ public class MainActivity extends Activity {
 
 
     }
+
+    public void onClickOsClear(View view) {
+        EditText pO2RText = (EditText) findViewById(R.id.pO2RText);
+        pO2RText.setText("");
+        EditText pO2AText = (EditText) findViewById(R.id.pO2AText);
+        pO2AText.setText("");
+        setSaveNeeded ();
+
+
+
+
+    }
+
+    public void onClickPo2RMinus(View view) {
+        EditText pO2RText = (EditText) findViewById(R.id.pO2RText);
+        String pO2RStr = pO2RText.getText().toString();
+        int pO2R = TextUtils.isEmpty(pO2RStr) ? defaultO2 : Integer.parseInt(pO2RStr);
+        pO2R = pO2R - 1;
+        pO2RStr = String.format("%d", pO2R);
+        pO2RText.setText(pO2RStr);
+        setSaveNeeded ();
+    }
+
+    public void onClickPo2RPlus(View view) {
+        EditText pO2RText = (EditText) findViewById(R.id.pO2RText);
+        String pO2RStr = pO2RText.getText().toString();
+        int pO2R = TextUtils.isEmpty(pO2RStr) ? defaultO2 : Integer.parseInt(pO2RStr);
+        pO2R = pO2R + 1;
+        pO2RStr = String.format("%d", pO2R);
+        pO2RText.setText(pO2RStr);
+        setSaveNeeded ();
+    }
+
+    public void onClickPo2AMinus(View view) {
+        EditText pO2AText = (EditText) findViewById(R.id.pO2AText);
+        String pO2AStr = pO2AText.getText().toString();
+        int pO2A = TextUtils.isEmpty(pO2AStr) ? defaultO2 : Integer.parseInt(pO2AStr);
+        pO2A = pO2A - 1;
+        pO2AStr = String.format("%d", pO2A);
+        pO2AText.setText(pO2AStr);
+        setSaveNeeded ();
+    }
+
+    public void onClickPo2APlus(View view) {
+        EditText pO2AText = (EditText) findViewById(R.id.pO2AText);
+        String pO2AStr = pO2AText.getText().toString();
+        int pO2A = TextUtils.isEmpty(pO2AStr) ? defaultO2 : Integer.parseInt(pO2AStr);
+        pO2A = pO2A + 1;
+        pO2AStr = String.format("%d", pO2A);
+        pO2AText.setText(pO2AStr);
+        setSaveNeeded ();
+    }
+
 
     public void onClickSave(View view) {
         TextView dateText = (TextView) findViewById(R.id.date_view);

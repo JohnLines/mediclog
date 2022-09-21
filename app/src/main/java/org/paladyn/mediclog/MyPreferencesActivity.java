@@ -28,7 +28,21 @@ public class MyPreferencesActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Try to hide historyLength, as it can not be altered just now
+        // This can not be done within onCreate as the preferences are not available yet
+
+        Preference histLen = findPreference("historyLength");
+
+        android.preference.PreferenceScreen preferenceScreen = getPreferenceScreen();
+        if (BuildConfig.DEBUG) {
+            if (histLen == null) Log.d("mediclog", "histLen is null");
+            if (preferenceScreen == null) Log.d("mediclog", "preferenceScreen is null");
+        }
+        if ( histLen != null && preferenceScreen != null )
+           preferenceScreen.removePreference(histLen);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
+
 
         // This was intended to make 3 checkboxes work as a radio button, but crashed on running, for now just use two check boxes
 /*

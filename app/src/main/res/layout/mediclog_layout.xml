@@ -19,10 +19,24 @@
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:id="@+id/bp_block"
-            android:layout_width="wrap_content"
+            android:id="@+id/measurement_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/measurement_left"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                >
+
+            <LinearLayout
+                android:id="@+id/bp_block"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
             <LinearLayout
@@ -287,6 +301,135 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/measurement_right"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+               >
+
+                <LinearLayout
+                    android:id="@+id/oximiter_block"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/os_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="9"
+                            android:text="@string/oxygen_saturation" />
+
+                        <ImageButton
+                            android:id="@+id/osClear"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="end"
+                            android:layout_weight="1"
+                            android:contentDescription="Clear Oxygen Saturation fields"
+                            android:onClick="onClickOsClear"
+                            android:scaleType="fitCenter"
+                            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rest" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/pO2RMinus"
+                            android:layout_width="@dimen/button_width"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickPo2RMinus"
+                            android:text="@string/minus" />
+
+                        <EditText
+                            android:id="@+id/pO2RText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:minHeight="48dp"
+                            android:text="130" />
+
+                        <Button
+                            android:id="@+id/pO2RPlus"
+                            android:layout_width="@dimen/button_width"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickPo2RPlus"
+                            android:text="@string/plus" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/after_activity" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/pO2AMinus"
+                            android:layout_width="@dimen/button_width"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickPo2AMinus"
+                            android:text="@string/minus" />
+
+                        <EditText
+                            android:id="@+id/pO2AText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:minHeight="48dp"
+                            android:text="130" />
+
+                        <Button
+                            android:id="@+id/pO2APlus"
+                            android:layout_width="@dimen/button_width"
+                            android:layout_height="wrap_content"
+                            android:ems="2"
+                            android:onClick="onClickPo2APlus"
+                            android:text="@string/plus" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+        </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="fill_parent"

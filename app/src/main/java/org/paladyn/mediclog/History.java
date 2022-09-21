@@ -20,34 +20,41 @@ package org.paladyn.mediclog;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.Calendar;
+import java.time.Month;
 
 public class History extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    boolean showTime = false;
+    boolean showEmptyComments = false;
+    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+    private void displayHistoryView(boolean showTime, boolean showEmptyComments) {
+        // The history view code will go here
+        boolean headerWritten = false;
+        boolean newYear = false;
+        boolean newMonth = false;
+        int year = 0;
+        int month = 0;
+        String monthName;
+
         setContentView(R.layout.history_layout);
-
-        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        if (sharedPref.getBoolean("timeUTC", true)) {
-            mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        } else {
-            mdformat.setTimeZone(TimeZone.getDefault());
-        }
-
         TextView historyTextView = (TextView) findViewById(R.id.history_text_view);
 
         final SpannableStringBuilder sb = new SpannableStringBuilder();
+
+        Log.d("mediclog", "History displayHistoryView showTime " + showTime + " showEmptyComments " + showEmptyComments);
 
         if (MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() +
                 MedicLog.getInstance(getApplicationContext()).getNumRecsAppendedToFile() == 0) {
@@ -70,32 +77,65 @@ public class History extends Activity {
                     try {
                         java.util.Date rdate = mdformat.parse(dateTime);
 
-                    java.util.Calendar rcal = java.util.Calendar.getInstance();
-                    rcal.setTime(rdate);
-                        int year = rcal.get(Calendar.YEAR);
-                        int month = rcal.get(Calendar.MONTH);
+                        java.util.Calendar rcal = java.util.Calendar.getInstance();
+                        rcal.setTime(rdate);
+                        int thisYear = rcal.get(Calendar.YEAR);
+                        if (thisYear != year) {
+                            newYear = true;
+                            year = thisYear;
+                        }
+                        int thisMonth = rcal.get(Calendar.MONTH);
+                        if (thisMonth != month) {
+                            newMonth = true;
+                            month = thisMonth;
+                        }
                         int day = rcal.get(Calendar.DAY_OF_MONTH);
                         int hour = rcal.get(Calendar.HOUR_OF_DAY);
                         int minute = rcal.get(Calendar.MINUTE);
-                    if (BuildConfig.DEBUG) {
-                       Log.d("mediclog", "DateTime  " +
-                            dateTime + " Y " + year + " m " + (month+1)+ " d "+ day + " h " + hour
-                            + " m "+ minute);
+                        if (BuildConfig.DEBUG) {
+                            Log.d("mediclog", "DateTime  " +
+                                    dateTime + " Y " + year + " m " + (month + 1) + " d " + day + " h " + hour
+                                    + " m " + minute);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 // for now just split
-                    String[]  thisDateTime = dateTime.split(" ", 2);
-                    sb.append(thisDateTime[0]);
-                    if (sharedPref.getBoolean("historyShowTime", false) ) {
-                        sb.append(' '); sb.append(thisDateTime[1]);
+                    // Before Writing any data, but after knowing the date, write a header if needed
+                    if (! headerWritten || newYear || newMonth ) {
+                        int boldStart = sb.length();
+                        sb.append(String.format("%02d", month + 1));
+                        //      new Month jMonth = Month.of(month);
+                        //      sb.append(jMonth.getDisplayName(java.time.format.TextStyle.SHORT_STANDALONE))
+                        sb.append(" - ");
+                        sb.append(String.valueOf(year));
+                        sb.append(" BP   \u2103     kg");
+                        int boldEnd = sb.length();
+                        // Make the header BOL
+                        sb.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                            boldStart, boldEnd,android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        sb.append("\n");
+                        newYear = false;
+                        newMonth = false;
+                        headerWritten = true;
+                    }
+
+
+                    String[] thisDateTime = dateTime.split(" ", 2);
+                    //split yyyy-mm-dd
+                    String[] thisDate  = thisDateTime[0].split("-",3);
+
+                    // sb.append(thisDateTime[0]);
+                    sb.append(thisDate[2]);
+                    if (showTime) {
+                        sb.append(' ');
+                        sb.append(thisDateTime[1]);
                     }
 
                     sb.append("-");
                 }
                 if (values.length > 4) {
-                    sb.append("(").append(values[2]).append(",").append(values[3]).append(",").append(values[4]).append(") ");
+                    sb.append("(").append(values[2]).append("/").append(values[3]).append(" ").append(values[4]).append(") ");
                 }
                 if (values.length > 5) {
                     sb.append(values[5]).append(" ");
@@ -110,8 +150,12 @@ public class History extends Activity {
                     //        + "*" + comment + "*");
                     // }
                     // hide emtpy comments of those which start with : unless historyShowEmptyComments is true
-                    if ((comment.length() > 0 && comment.charAt(0) != ':' )  || sharedPref.getBoolean("historyShowEmptyComments", false) ) {
+                    if ((comment.length() > 0 && comment.charAt(0) != ':') || showEmptyComments) {
+                        int cmtStart = sb.length();
                         sb.append("\n").append(comment);
+                        int cmtEnd = sb.length();
+                        sb.setSpan(new android.text.style.StyleSpan(Typeface.ITALIC),
+                                cmtStart, cmtEnd,android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
                 } else {
                     if (BuildConfig.DEBUG) {
@@ -132,4 +176,71 @@ public class History extends Activity {
         // Log.d("mediclog", "History - sb cleared");
         MedicLog.getInstance(getApplicationContext()).resetHistBuffReadIndex();
     }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.history_layout);
+
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+
+        if (sharedPref.getBoolean("timeUTC", true)) {
+            mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        } else {
+            mdformat.setTimeZone(TimeZone.getDefault());
+        }
+        if (sharedPref.getBoolean("historyShowTime", false) ) {
+            Log.d("mediclog","History - setting showTime to true");
+            showTime = true;
+        }
+        if (sharedPref.getBoolean("historyEmptyComments", false) ) {
+            showEmptyComments = true;
+        }
+        Log.d("mediclog","History onCreate about to call displayHistoryView");
+        displayHistoryView( showTime, showEmptyComments);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_history, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)  {
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        switch (item.getItemId()) {
+            case R.id.showTime:
+                if (! item.isChecked()) {
+                    Log.d("mediclog","onOptionsItemSelected - setting showTime to true");
+                    item.setChecked(true);
+                   showTime = true;
+                } else {
+                    Log.d("mediclog","onOptionsItemSelected - showTime was not checked");
+                    item.setChecked(false);
+                    showTime = false;
+                }
+            case R.id.showEmptyComments:
+                if (! item.isChecked()) {
+                    Log.d("mediclog","onOptionsItemSelected - setting showEmptyComments to true");
+                    item.setChecked(true);
+                    showEmptyComments = true;
+                } else {
+                    Log.d("mediclog","onOptionsItemSelected - showEmptyComments was not checked");
+                    item.setChecked(false);
+                    showEmptyComments = false;
+                }
+
+        }
+        Log.d("mediclog","History onOptionsItemSelected about to call displayHistoryView");
+    displayHistoryView( showTime, showEmptyComments);
+    return true;
+    }
+
 }
+
+
