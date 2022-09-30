@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
     final int defaultTemperature = 363;
     final int defaultWeight = 750;
     final int defaultO2 = 98;
+    String fileFormatVersion = "1.1";
+    String fileFormatOldVersion = "1.0";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +113,7 @@ public class MainActivity extends Activity {
         try {
             FileOutputStream os = new FileOutputStream(file);
             BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(os));
-            fbw.write("MedicLog 1.0,Date time,Systolic,Diastolic,Heart rate,Temperature,Weight,Comment");
+            fbw.write("MedicLog " + fileFormatVersion + ",Date time,Systolic,Diastolic,Heart rate,Temperature,Weight,Comment");
             fbw.newLine();
             fbw.flush();
             fbw.close();
@@ -155,7 +157,8 @@ public class MainActivity extends Activity {
                 // First line should be the header
                 String header = reader.readLine();
                 String[] hvals = header.split(",");
-                if (!hvals[0].equals("MedicLog 1.0")) {
+                if (!(hvals[0].equals("MedicLog "+ fileFormatOldVersion) ||
+                        hvals[0].equals("MedicLog " + fileFormatVersion) ) ) {
                     //throw new DataFormatException("MedicLog -Unknown format type *" + hvals[0] + "*");
                     Log.w("mediclog", "Unknown format type " + hvals[0]);
                 }
@@ -447,7 +450,7 @@ public class MainActivity extends Activity {
         EditText pO2RText = (EditText) findViewById(R.id.pO2RText);
         String pO2RStr = pO2RText.getText().toString();
         int pO2R = TextUtils.isEmpty(pO2RStr) ? defaultO2 : Integer.parseInt(pO2RStr);
-        pO2R = pO2R + 1;
+        if ( pO2R < 99 ) { pO2R = pO2R + 1; }
         pO2RStr = String.format("%d", pO2R);
         pO2RText.setText(pO2RStr);
         setSaveNeeded ();
@@ -467,7 +470,7 @@ public class MainActivity extends Activity {
         EditText pO2AText = (EditText) findViewById(R.id.pO2AText);
         String pO2AStr = pO2AText.getText().toString();
         int pO2A = TextUtils.isEmpty(pO2AStr) ? defaultO2 : Integer.parseInt(pO2AStr);
-        pO2A = pO2A + 1;
+        if ( pO2A < 99 ) { pO2A = pO2A + 1; }
         pO2AStr = String.format("%d", pO2A);
         pO2AText.setText(pO2AStr);
         setSaveNeeded ();
@@ -489,6 +492,11 @@ public class MainActivity extends Activity {
         String weightStr = weightText.getText().toString();
         EditText commentText = (EditText) findViewById(R.id.commentText);
         String commentStr = commentText.getText().toString();
+        TextView pO2RText = (EditText) findViewById(R.id.pO2RText);
+        String pO2RStr = pO2RText.getText().toString();
+        TextView pO2AText = (EditText) findViewById(R.id.pO2AText);
+        String pO2AStr = pO2AText.getText().toString();
+
 
         try {
             SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
@@ -504,7 +512,22 @@ public class MainActivity extends Activity {
                     OutputStreamWriter(fOut);
             BufferedWriter fbw = new BufferedWriter(osw);
 
-            String str = "1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + commentStr;
+            // In 1.1 Format the comment string can also contain Pulse Oximeter and wother data
+            StringBuilder extraString = new StringBuilder();
+            if (! commentStr.isEmpty()) {
+                extraString.append(":C " + commentStr);
+            }
+            if (! pO2RStr.isEmpty()) {
+                extraString.append(":OR " + pO2RStr);
+            }
+            if (! pO2AStr.isEmpty()) {
+                extraString.append(":OA " + pO2AStr);
+            }
+            if (BuildConfig.DEBUG) {
+                Log.d("mediclog", "Save - extraString is " + extraString);
+            }
+
+            String str = "1," + strDate + "," + systolicStr + "," + diastolicStr + "," + heartrateStr + "," + tempStr + "," + weightStr + "," + extraString;
             fbw.write(str);
             fbw.newLine();
             fbw.flush();

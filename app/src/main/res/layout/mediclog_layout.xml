@@ -372,7 +372,7 @@
                             android:inputType="number"
                             android:maxLength="2"
                             android:minHeight="48dp"
-                            android:text="130" />
+                            android:text="98" />
 
                         <Button
                             android:id="@+id/pO2RPlus"
@@ -410,7 +410,7 @@
                             android:inputType="number"
                             android:maxLength="2"
                             android:minHeight="48dp"
-                            android:text="130" />
+                            android:text="98" />
 
                         <Button
                             android:id="@+id/pO2APlus"

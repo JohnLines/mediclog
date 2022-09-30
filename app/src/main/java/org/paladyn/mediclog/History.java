@@ -149,10 +149,21 @@ public class History extends Activity {
                     //   Log.d("mediclog", "comment  " + comment.length()
                     //        + "*" + comment + "*");
                     // }
-                    // hide emtpy comments of those which start with : unless historyShowEmptyComments is true
-                    if ((comment.length() > 0 && comment.charAt(0) != ':') || showEmptyComments) {
+                    // hide emtpy comments or those which start with : unless historyShowEmptyComments is true
+                    if ((comment.length() > 0 && comment.charAt(0) != ':') ||
+                            (comment.length() >1  && comment.charAt(0) == ':' && comment.charAt(1) == 'C' ) ||
+                            showEmptyComments) {
+                        int cmtStartIndex = 0;   // where does the part of the comment do be displayed start
+                        int cmtEndIndex = comment.length();
+                        if (comment.length() >1  && comment.charAt(0) == ':' && comment.charAt(1) == 'C' ) {
+                            cmtStartIndex = 2;
+                            // truncate displayed string at first : if there is one
+                            if (comment.indexOf(":", 1) > 0 ) {
+                                cmtEndIndex = comment.indexOf(":", 1);
+                            }
+                        }
                         int cmtStart = sb.length();
-                        sb.append("\n").append(comment);
+                        sb.append("\n").append(comment.substring(cmtStartIndex, cmtEndIndex));
                         int cmtEnd = sb.length();
                         sb.setSpan(new android.text.style.StyleSpan(Typeface.ITALIC),
                                 cmtStart, cmtEnd,android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
