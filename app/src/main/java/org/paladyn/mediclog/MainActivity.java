@@ -450,7 +450,7 @@ public class MainActivity extends Activity {
         EditText pO2RText = (EditText) findViewById(R.id.pO2RText);
         String pO2RStr = pO2RText.getText().toString();
         int pO2R = TextUtils.isEmpty(pO2RStr) ? defaultO2 : Integer.parseInt(pO2RStr);
-        if ( pO2R < 99 ) { pO2R = pO2R + 1; }
+        if ( pO2R < 100 ) { pO2R = pO2R + 1; }
         pO2RStr = String.format("%d", pO2R);
         pO2RText.setText(pO2RStr);
         setSaveNeeded ();
@@ -470,7 +470,7 @@ public class MainActivity extends Activity {
         EditText pO2AText = (EditText) findViewById(R.id.pO2AText);
         String pO2AStr = pO2AText.getText().toString();
         int pO2A = TextUtils.isEmpty(pO2AStr) ? defaultO2 : Integer.parseInt(pO2AStr);
-        if ( pO2A < 99 ) { pO2A = pO2A + 1; }
+        if ( pO2A < 100 ) { pO2A = pO2A + 1; }
         pO2AStr = String.format("%d", pO2A);
         pO2AText.setText(pO2AStr);
         setSaveNeeded ();

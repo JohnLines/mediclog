@@ -370,7 +370,7 @@
                             android:layout_height="wrap_content"
                             android:ems="2"
                             android:inputType="number"
-                            android:maxLength="2"
+                            android:maxLength="3"
                             android:minHeight="48dp"
                             android:text="98" />
 
@@ -408,7 +408,7 @@
                             android:layout_height="wrap_content"
                             android:ems="2"
                             android:inputType="number"
-                            android:maxLength="2"
+                            android:maxLength="3"
                             android:minHeight="48dp"
                             android:text="98" />
 
