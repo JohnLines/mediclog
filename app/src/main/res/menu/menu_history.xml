@@ -4,10 +4,10 @@
     <item
         android:id="@+id/showTime"
         android:checkable="true"
-        android:title="Show Time" />
+        android:title="@string/show_time" />
     <item
         android:id="@+id/showEmptyComments"
         android:checkable="true"
-        android:title="Show Emtpy Comments" />
+        android:title="@string/show_empty_comments" />
 
 </menu>

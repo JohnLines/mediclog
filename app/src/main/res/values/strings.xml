@@ -69,4 +69,6 @@
     <string name="oxygen_saturation">Oxygen Saturation</string>
     <string name="rest">Rest</string>
     <string name="after_activity">After Activity</string>
+    <string name="show_empty_comments">Show Empty Comments</string>
+    <string name="show_time">Show Time</string>
 </resources>

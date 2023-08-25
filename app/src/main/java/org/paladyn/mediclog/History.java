@@ -149,7 +149,7 @@ public class History extends Activity {
                     //   Log.d("mediclog", "comment  " + comment.length()
                     //        + "*" + comment + "*");
                     // }
-                    // hide emtpy comments or those which start with : unless historyShowEmptyComments is true
+                    // hide empty comments or those which start with : unless historyShowEmptyComments is true
                     if ((comment.length() > 0 && comment.charAt(0) != ':') ||
                             (comment.length() >1  && comment.charAt(0) == ':' && comment.charAt(1) == 'C' ) ||
                             showEmptyComments) {
@@ -205,7 +205,7 @@ public class History extends Activity {
             Log.d("mediclog","History - setting showTime to true");
             showTime = true;
         }
-        if (sharedPref.getBoolean("historyEmptyComments", false) ) {
+        if (sharedPref.getBoolean("historyShowEmptyComments", false) ) {
             showEmptyComments = true;
         }
         Log.d("mediclog","History onCreate about to call displayHistoryView");
