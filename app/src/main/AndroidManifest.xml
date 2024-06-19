@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.paladyn.mediclog">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Am not currently using external storage, but being given it for compatibility -->
     <!--uses-permission
