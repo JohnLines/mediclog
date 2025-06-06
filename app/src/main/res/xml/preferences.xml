@@ -8,37 +8,44 @@
         android:summary="@string/file_name_desc"
         android:title="@string/file_name" />
 
-    <EditTextPreference
-        android:defaultValue=""
-        android:key="sendTo"
-        android:summary="@string/send_to_desc"
-        android:title="@string/send_to" />
-
-    <EditTextPreference
-        android:defaultValue="MedicLog records"
-        android:key="sendSubject"
-        android:summary="@string/send_subject_desc"
-        android:title="@string/send_subject" />
-
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="recordPulseOximeter"
         android:summary="Enable extra input fields fro Oxygen Saturation measurements"
         android:title="Do you want to record Pusle Oximeter results ?" />
-    <EditTextPreference
-        android:defaultValue="40"
-        android:enabled="false"
-        android:inputType="number"
-        android:key="historyLength"
-        android:summary="@string/history_length_desc"
-        android:title="@string/history_length"
-        android:visibility="invisible" />
+
+    <PreferenceScreen
+        android:key="send_preferences"
+        android:title="Send Preferences">
+        android:summary="Options affecting the sending data from Mediclog"
+
+       <EditTextPreference
+        android:defaultValue=""
+        android:key="sendTo"
+        android:summary="@string/send_to_desc"
+        android:title="@string/send_to" />
+
+       <EditTextPreference
+        android:defaultValue="MedicLog records"
+        android:key="sendSubject"
+        android:summary="@string/send_subject_desc"
+        android:title="@string/send_subject" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="false"
+            android:key="enableSaveAndSend"
+            android:summary="Enable automatic send of latest result when '+' button is used."
+            android:title="Enable Save + Send"
+            android:visibility="invisible" />
+
+
+    </PreferenceScreen>
 
     <PreferenceScreen
         android:key="history_display_prefs"
         android:title="@string/history_disp_prefs">
         android:summary="Options affecting the History display"
-
 
     <CheckBoxPreference
         android:defaultValue="false"
@@ -51,6 +58,16 @@
         android:key="historyShowTime"
         android:summary="If enabled then record times will be displayed in the history"
         android:title="History Show Time" />
+
+        <EditTextPreference
+            android:defaultValue="40"
+            android:enabled="false"
+            android:inputType="number"
+            android:key="historyLength"
+            android:summary="@string/history_length_desc"
+            android:title="@string/history_length"
+            android:visibility="invisible" />
+
      </PreferenceScreen>
 
     <CheckBoxPreference

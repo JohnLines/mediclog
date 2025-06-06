@@ -265,6 +265,22 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void updateDisplayedDate() {
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        if (sharedPref.getBoolean("timeUTC", true)) {
+            mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        } else {
+            mdformat.setTimeZone(TimeZone.getDefault());
+        }
+        String strDate = mdformat.format(calendar.getTime());
+        TextView dateView = (TextView) findViewById(R.id.date_view);
+        dateView.setText(strDate);
+
+
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -286,17 +302,8 @@ public class MainActivity extends Activity {
 
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText(R.string.description);
-        Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        if (sharedPref.getBoolean("timeUTC", true)) {
-            mdformat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        } else {
-            mdformat.setTimeZone(TimeZone.getDefault());
-        }
-        String strDate = mdformat.format(calendar.getTime());
-        TextView dateView = (TextView) findViewById(R.id.date_view);
-        dateView.setText(strDate);
+        updateDisplayedDate();
 
         if (sharedPref.getBoolean("recordPulseOximeter", false)) {
             View o2Block = findViewById(R.id.oximiter_block) ;
@@ -522,6 +529,9 @@ public class MainActivity extends Activity {
             if (BuildConfig.DEBUG) {
                 Log.d("mediclog", "Save - extraString is " + extraString);
             }
+
+            updateDisplayedDate();
+
 // set the date in the save to the date and of the save
 
             Calendar calendar2 = Calendar.getInstance();

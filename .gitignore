@@ -41,6 +41,7 @@ captures/
 # JL - will ignore all .idea stuff, I dont need it in mediclog
 #
 .idea
+.idea/
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -48,6 +49,8 @@ captures/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/misc.xml
+
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -76,8 +79,8 @@ captures/
 # .idea/compiler.xml
 # .idea/jarRepositories.xml
 # .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
+.idea/*.iml
+.idea/modules
 # *.iml
 # *.ipr
 
