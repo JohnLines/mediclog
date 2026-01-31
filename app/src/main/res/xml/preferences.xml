@@ -10,9 +10,17 @@
 
     <CheckBoxPreference
         android:defaultValue="false"
+        android:enabled="true"
+        android:key="prependDate"
+        android:summary="Prepend date in the form yyyy-mm-dd- to save filename"
+        android:title="Prepend date"
+        android:visibility="visible" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
         android:key="recordPulseOximeter"
         android:summary="Enable extra input fields fro Oxygen Saturation measurements"
-        android:title="Do you want to record Pusle Oximeter results ?" />
+        android:title="Do you want to record Pulse Oximeter results ?" />
 
     <PreferenceScreen
         android:key="send_preferences"
@@ -35,10 +43,17 @@
             android:defaultValue="false"
             android:enabled="false"
             android:key="enableSaveAndSend"
-            android:summary="Enable automatic send of latest result when '+' button is used."
+            android:summary="Enable automatic send of latest result when '+' button is used. Not yet available."
             android:title="Enable Save + Send"
             android:visibility="invisible" />
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="enableSendAndDelete"
+            android:summary="Add a '+' button which will Send and then Delete/Truncate when activated."
+            android:title="Enable Send + Delete"
+            android:visibility="visible" />
 
     </PreferenceScreen>
 

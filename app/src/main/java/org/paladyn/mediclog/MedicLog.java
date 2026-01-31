@@ -51,7 +51,7 @@ public class MedicLog {
     private boolean saveTextOriginalColourKnown = false;
     private int saveTextOrignalColour;
 
-
+   private boolean inSendAndDelete = false;
 
     private MedicLog(Context context) {
     }
@@ -109,6 +109,9 @@ public class MedicLog {
         return histBuffIndex;
     }
 
+    boolean calledFromSaveAndDelete ()  { return inSendAndDelete; }
+
+    void setInSenddAndDelete ( boolean val) { inSendAndDelete = val; }
     private void incHistBuffIndex() {
         // wrap the history buffer index round in this routine.
         //Log.d("mediclog", "incHistBuffIndex -" + histBuffIndex);

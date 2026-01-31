@@ -443,7 +443,8 @@
                 android:layout_gravity="start"
                 android:layout_weight="9"
                 android:inputType="textCapSentences|textAutoCorrect"
-                android:text="" />
+                android:text=""
+                android:contentDescription="Optional comment for this entry"/>
 
             <ImageButton
                 android:id="@+id/commentClear"
@@ -474,6 +475,16 @@
                 android:text="@string/save" />
 
             <Button
+                android:id="@+id/btnSaveAndSend"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:ems="8"
+                android:onClick="onClickSaveAndSend"
+                android:text="+"
+                android:visibility="gone"/>
+
+            <Button
                 android:id="@+id/btnSend"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
@@ -483,6 +494,19 @@
                 android:text="@string/send"
                 android:visibility="gone" />
 
+            <Button
+                android:id="@+id/btnSendAndDelete"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:ems="8"
+                android:onClick="onClickSendAndDelete"
+                android:text="+"
+                android:visibility="gone"
+                android:hint="@string/sendAndDeletebtnHint"
+                android:tooltipText="Send data, invoke Delete option. If the send succeeded you can then select Truncate, or OK to remove all records. Note that mediclog has no way to tell if the send really succeeded."
+
+                />
             <Button
                 android:id="@+id/btnDelete"
                 style="?android:attr/buttonBarButtonStyle"

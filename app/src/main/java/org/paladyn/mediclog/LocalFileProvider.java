@@ -51,11 +51,20 @@ public class LocalFileProvider extends ContentProvider {
     public ParcelFileDescriptor openFile(Uri uri, String mode)
             throws FileNotFoundException {
 
-        String LOG_TAG = CLASS_NAME + " - openFile";
+  //      String LOG_TAG = CLASS_NAME + " - openFile";
+        String LOG_TAG ="mediclog";
 
-        //Log.v(LOG_TAG, "Called with uri: '" + uri + "'." + uri.getLastPathSegment());
+        Log.d(LOG_TAG, "Called with uri: '" + uri + "'." + uri.getLastPathSegment()
+            + " encoded query " + uri.getEncodedQuery());
         // URI always look like content://org.paladyn.mediclog.LocalFileProvider/mediclog.txt
 
+        // If there is an encoded qury with a name= component then the value of name is the
+        // actual file name to return to the program which is actually doing the sending/
+        String realName = uri.getLastPathSegment();
+
+        if (uri.getEncodedQuery() != "") {
+            realName = uri.getQueryParameter("name");
+        } ;
         // Check incoming Uri against the matcher
         // If it returns 1 - then it matches the Uri defined in onCreate
         if (uriMatcher.match(uri) == 1) {// The desired file name is specified by the last segment of the
@@ -65,10 +74,10 @@ public class LocalFileProvider extends ContentProvider {
             // Take this and build the path to the file
 
             String fileLocation = getContext().getFilesDir() + File.separator
-                    + uri.getLastPathSegment();
+                    + realName ;
             // Protect against a possible Path Traversal vulnerability by checking that the Cannonical
             // path starts with the right string
-            //Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
+            Log.v(LOG_TAG, "fileLocation: '" + fileLocation + "'.");
             File f;
             try {
                 f = new File(fileLocation);

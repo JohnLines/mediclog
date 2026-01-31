@@ -63,6 +63,8 @@ public class About extends Activity {
             fileSizeString =  df.format(fileSizeInBytes / sizeGb) + " Gb";
 
 
+
+
         Spanned aboutText = Html.fromHtml("<h1>MedicLog, Version " + versionName + "</h1>"
                 + getString(R.string.about_text) + "<p>"
                 + getString(R.string.records_read) + " " + MedicLog.getInstance(getApplicationContext()).getNumRecsReadFromFile() + "<br>"

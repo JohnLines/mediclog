@@ -79,6 +79,12 @@ public class MainActivity extends Activity {
         spo2a.setDefault_value(defaultO2);
 
     }
+    public final static int MY_SEND_REQUEST_CODE = 3757;
+    private File getMedicLogFile() {
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        File file = new File(getFilesDir(), sharedPref.getString("fileName", "mediclog.txt"));
+        return file;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -312,6 +318,14 @@ public class MainActivity extends Activity {
             View o2Block = findViewById(R.id.oximiter_block) ;
             o2Block.setVisibility(View.GONE);
         }
+
+        if (sharedPref.getBoolean("enableSendAndDelete", false)) {
+            View sendAndDeleteButton = findViewById(R.id.btnSendAndDelete);
+            sendAndDeleteButton.setVisibility(View.VISIBLE);
+        } else {
+            View sendAndDeleteButton = findViewById(R.id.btnSendAndDelete);
+            sendAndDeleteButton.setVisibility(View.GONE);
+        }
     }
 
     public void onClickBpClear(View view) {
@@ -359,13 +373,6 @@ public class MainActivity extends Activity {
     public void onClickHrateMinus(View view) {
         EditText heartrateText = (EditText) findViewById(R.id.heartrateText);
         bpPulse.onClickPlusMinus(heartrateText, minus);
-        /*
-        String heartrateStr = heartrateText.getText().toString();
-        int heartrate = TextUtils.isEmpty(heartrateStr) ? defaultHeartrate : Integer.parseInt(heartrateStr);
-        heartrate = heartrate - 1;
-        heartrateStr = String.format("%d", heartrate);
-        heartrateText.setText(heartrateStr);
-        */
         setSaveNeeded ();
     }
 
@@ -567,25 +574,61 @@ public class MainActivity extends Activity {
 
 
     public void onClickSend(View view) {
+    //    public final static int MY_SEND_REQUEST_CODE = 3757;
         SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat thisDate = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = thisDate.format(calendar.getTime());
+        String dateString;
 
         final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/csv");
         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo", "").split(","));
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, sharedPref.getString("sendSubject", "MedicLog"));
 
-        // Put something to pick up the attachment
-        emailIntent.putExtra(
-                android.content.Intent.EXTRA_STREAM, Uri.parse("content://" + LocalFileProvider.AUTHORITY + "/"
-                        + sharedPref.getString("fileName", "mediclog.txt")));
 
-        this.startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
+        if ( sharedPref.getBoolean("prependDate",false)) {
+            dateString = strDate + "-";
+        } else {
+            dateString = "";
+        }
+
+        // Put something to pick up the attachment
+        String extraString = "content://" + LocalFileProvider.AUTHORITY + "/"
+                + dateString +  sharedPref.getString("fileName", "mediclog.txt")
+                + "?name=" + sharedPref.getString("fileName", "mediclog.txt");
+        emailIntent.putExtra(
+                android.content.Intent.EXTRA_STREAM, Uri.parse(extraString));
+
+        if (BuildConfig.DEBUG) {
+            Log.d("mediclog", "Send- extraString is " + extraString);
+        }
+
+       this.startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
+
+        //
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        public final static int MY_SEND_REQUEST_CODE = 3757;
+        if (requestCode == MY_SEND_REQUEST_CODE )  {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Ok DUDE", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Oversmart Eh!!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public void onClickDelete(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.delete_file);
-        alert.setMessage(R.string.delete_message);
+        if ( MedicLog.getInstance(getApplicationContext()).calledFromSaveAndDelete() ) {
+            alert.setMessage(R.string.delete_trunate_message);
+        } else {
+            alert.setMessage(R.string.delete_message);
+        }
         alert.setPositiveButton(android.R.string.yes, (dialog, which) -> {
             SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
             File dir = getFilesDir();
@@ -661,5 +704,67 @@ public class MainActivity extends Activity {
             dialog.cancel();
         });
         alert.show();
+    }
+
+    public void onClickSendAndDelete(View view) {
+        // first send
+        if (BuildConfig.DEBUG) {
+            Log.d("mediclog", "onClickSendAndDelete before send");
+        }
+        MedicLog.getInstance(getApplicationContext()).setInSenddAndDelete( true );
+/*
+        // Move mediclog.txt (or whatever) to mediclog.txt.tmp
+        SharedPreferences sharedPref = getSharedPreferences("org.paladyn.mediclog_preferences", MODE_PRIVATE);
+        File file = new File(getFilesDir(), sharedPref.getString("fileName", "mediclog.txt"));
+        // generate a temporary name which ends in .txt as - at present - this is how the file is sent.
+        File newFile = new File(getFilesDir(), sharedPref.getString("fileName", "mediclog.txt")+".tmp.txt");
+        if ( !file.renameTo(newFile)) {
+            Toast toast = Toast.makeText(this, "SendAndDelete rename failed", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        //    public final static int MY_SEND_REQUEST_CODE = 3757;
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat thisDate = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = thisDate.format(calendar.getTime());
+        String dateString;
+
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("text/csv");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, sharedPref.getString("sendTo", "").split(","));
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, sharedPref.getString("sendSubject", "MedicLog"));
+
+
+        if ( sharedPref.getBoolean("prependDate",false)) {
+            dateString = strDate + "-";
+        } else {
+            dateString = "";
+        }
+
+        // Put something to pick up the attachment
+        emailIntent.putExtra(
+                android.content.Intent.EXTRA_STREAM, Uri.parse("content://" + LocalFileProvider.AUTHORITY + "/"
+                        + dateString + sharedPref.getString("fileName", "mediclog.txt")+".tmp.txt"));
+
+        //   this.startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
+        this.startActivityForResult(Intent.createChooser(emailIntent, getString(R.string.send_email)),MY_SEND_REQUEST_CODE);
+
+        //
+  //       onClickSend(view);
+
+
+ */
+        onClickSend(view);
+        if (BuildConfig.DEBUG) {
+            Log.d("mediclog", "onClickSendAndDelete after send");
+        }
+
+       onClickDelete(view);
+        // make a new file
+
+        // write History buffer to new mediclog.txt
+        MedicLog.getInstance(getApplicationContext()).setInSenddAndDelete( false );
+
+
     }
 }

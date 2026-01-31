@@ -71,4 +71,6 @@
     <string name="after_activity">After Activity</string>
     <string name="show_empty_comments">Show Empty Comments</string>
     <string name="show_time">Show Time</string>
+    <string name="sendAndDeletebtnHint">Send all saved records and purge to maximum history size</string>
+    <string name="delete_trunate_message">If the Send succeeded then select Truncate below\nto truncate the internal copy of the data to\nthe History length, othwise select Cancel</string>
 </resources>
