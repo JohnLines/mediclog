@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 34
+    compileSdk 35
 //    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "org.paladyn.mediclog"
         minSdkVersion 14
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionName "0.2.19"
-        versionCode 24
+        versionCode 25
     }
 
     buildTypes {
